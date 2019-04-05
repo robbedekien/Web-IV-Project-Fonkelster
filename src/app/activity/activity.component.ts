@@ -4,7 +4,7 @@ import { Activity } from '../activity.model';
 @Component({
   selector: 'app-activity',
   templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.sass']
+  styleUrls: ['./activity.component.scss']
 })
 export class ActivityComponent implements OnInit {
   @Input() public activity : Activity;

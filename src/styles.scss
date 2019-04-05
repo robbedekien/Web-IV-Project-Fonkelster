@@ -2,6 +2,41 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 
+$blue: #008BD0;
+$red: #E50D0D;
+$orange: #F07306;
+$yellow: #F9B820;
+$green: #46B72A;
+$lightblue: #31C5D8;
+
+/*
+    light-blue: 008BD0
+*/
 *{
     font-family: 'Fredoka One', cursive;
+    color: #626263;
+}
+.container{
+    width: 60%;
+    margin: 0 auto;
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color: $blue;
+}
+
+button, .mat-button{
+    padding: 0.5em;
+    border-radius: 50px !important;
+    box-shadow: none;
+    border: none;
+    background-color: $yellow;
+    color: white;
+    &:hover{
+        background-color: $orange;
+        transition: 0.5s;
+    }
+}
+
+.mat-form-field{
+    min-width: 0 !important;
 }

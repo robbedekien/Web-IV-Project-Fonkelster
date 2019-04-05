@@ -6,28 +6,27 @@ import { ActivityComponent } from './activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatDatepicker, MatDatepickerModule, DateAdapter, MatNativeDateModule } from '@angular/material';
 import {RouterModule, Routes} from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-const appRoutes: Routes = [
-  { path: 'activity', component: ActivityComponent },
-  { path: '', redirectTo: 'activity', pathMatch: 'full'},
-  { path: '**', component: PageNotFoundComponent}
-];
+import { RegisterComponent } from './register/register.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ActivityComponent,
     MainNavComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     MatListModule,
     MatCardModule,
@@ -39,7 +38,13 @@ const appRoutes: Routes = [
     HttpClientModule,
     LayoutModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTabsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
