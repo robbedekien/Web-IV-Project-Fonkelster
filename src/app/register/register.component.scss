@@ -24,7 +24,6 @@ $lightblue: #31C5D8;
         width: 30%;
       }
     }
-
     form.registerForm {
       display: flex;
       margin: 0 auto;
@@ -36,7 +35,6 @@ $lightblue: #31C5D8;
         margin-left: 0;
         float: left;
       }
-
       table {
         width: 100%;
 
@@ -49,6 +47,7 @@ $lightblue: #31C5D8;
         td.small>*{
           width: 85%;
         }
+        
       }
     }
   }

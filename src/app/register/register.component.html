@@ -1,19 +1,32 @@
 <mat-tab-group dynamicHeight class="tabgroup" mat-align-tabs="center">
   <mat-tab label="Log in" style="margin-top: 1em;">
     <div class="mat-elevation-z4 tabcontent">
-      <form (ngSubmit)='logIn()' class="loginForm" [formGroup]="login">
+      <form (ngSubmit)="logIn()" class="loginForm" [formGroup]="login">
         <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email">
-          <mat-error *ngIf="login.get('email')['errors']  && 
-                login.get('email').touched">
-            {{getErrorMessage(login.get('email')['errors']) }}
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error
+            *ngIf="login.get('email')['errors'] && login.get('email').touched"
+          >
+            {{ getErrorMessage(login.get("email")["errors"]) }}
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Wachtwoord" formControlName="password">
-          <mat-error *ngIf="login.get('password')['errors']  && 
-                login.get('password').touched">
-            {{getErrorMessage(login.get('password')['errors']) }}
+          <input
+                  matInput
+                  placeholder="Wachtwoord"
+                  formControlName="password"
+                  [type]="hidel ? 'text' : 'password'"
+                  required
+                />
+                <mat-icon matSuffix (click)="hidel = !hidel">{{
+                  hidel ? "visibility_off" : "visibility"
+                }}</mat-icon>
+          <mat-error
+            *ngIf="
+              login.get('password')['errors'] && login.get('password').touched
+            "
+          >
+            {{ getErrorMessage(login.get("password")["errors"]) }}
           </mat-error>
         </mat-form-field>
         <button type="submit" mat-button>
@@ -24,24 +37,42 @@
   </mat-tab>
   <mat-tab label="Registreer" style="margin-top: 1em;">
     <div class="mat-elevation-z4 tabcontent">
-      <form (ngSubmit)='Register()' class="registerForm" [formGroup]="register">
+      <form (ngSubmit)="Register()" class="registerForm" [formGroup]="register">
         <table>
           <tr>
             <td colspan="3">
               <mat-form-field>
-                <input matInput placeholder="Voornaam" formControlName="firstName" required>
-                <mat-error *ngIf="register.get('firstName')['errors']  && 
-                    register.get('firstName').touched">
-                  {{getErrorMessage(register.get('firstName')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Voornaam"
+                  formControlName="firstName"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('firstName')['errors'] &&
+                    register.get('firstName').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("firstName")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
             <td colspan="3">
               <mat-form-field>
-                <input matInput placeholder="Achternaam" formControlName="name" required>
-                <mat-error *ngIf="register.get('name')['errors']  && 
-                register.get('name').touched">
-                  {{getErrorMessage(register.get('name')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Achternaam"
+                  formControlName="name"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('name')['errors'] &&
+                    register.get('name').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("name")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
@@ -49,10 +80,19 @@
           <tr>
             <td colspan="6" class="fullLength">
               <mat-form-field>
-                <input matInput placeholder="Email" formControlName="email" required>
-                <mat-error *ngIf="register.get('email')['errors']  && 
-                    register.get('email').touched">
-                  {{getErrorMessage(register.get('email')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Email"
+                  formControlName="email"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('email')['errors'] &&
+                    register.get('email').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("email")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
@@ -60,50 +100,116 @@
           <tr>
             <td colspan="2">
               <mat-form-field>
-                <input matInput placeholder="Straat" formControlName="street" required>
-                <mat-error *ngIf="register.get('street')['errors']  && 
-                      register.get('street').touched">
-                  {{getErrorMessage(register.get('street')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Straat"
+                  formControlName="street"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('street')['errors'] &&
+                    register.get('street').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("street")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
             <td colspan="2">
               <mat-form-field>
-                <input matInput placeholder="Nr" formControlName="nr" required>
-                <mat-error *ngIf="register.get('nr')['errors']  && 
-                      register.get('nr').touched">
-                  {{getErrorMessage(register.get('nr')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Nr"
+                  formControlName="nr"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('nr')['errors'] && register.get('nr').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("nr")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
             <td colspan="2">
               <mat-form-field>
-                <input matInput placeholder="Postcode" formControlName="postal" required>
-                <mat-error *ngIf="register.get('postal')['errors']  && 
-                          register.get('postal').touched">
-                  {{getErrorMessage(register.get('postal')['errors']) }}
+                <mat-label>Geslacht</mat-label>
+                <mat-select matInput formControlName="gender" required>
+                    <mat-option *ngFor="let gender of genders" [value]="gender">
+                        {{gender}} 
+                      </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="
+                    register.get('gender')['errors'] &&
+                    register.get('gender').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("gender")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
           </tr>
           <tr>
-            <td colspan="3">
+            <td colspan="2">
               <mat-form-field>
-                <input matInput placeholder="Stad" formControlName="city" required>
-                <mat-error *ngIf="register.get('city')['errors']  && 
-                      register.get('city').touched">
-                  {{getErrorMessage(register.get('city')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Postcode"
+                  formControlName="postal"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('postal')['errors'] &&
+                    register.get('postal').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("postal")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
-            <td colspan="3">
+            <td colspan="2">
               <mat-form-field>
-                <input matInput placeholder="Geboortedatum" formControlName="bday" [matDatepicker]="picker" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <input
+                  matInput
+                  placeholder="Stad"
+                  formControlName="city"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    register.get('city')['errors'] &&
+                    register.get('city').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("city")["errors"]) }}
+                </mat-error>
+              </mat-form-field>
+            </td>
+            <td colspan="2">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Geboortedatum"
+                  formControlName="dateOfBirth"
+                  [matDatepicker]="picker"
+                  required
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="register.get('bday')['errors']  && 
-                      register.get('bday').touched">
-                  {{getErrorMessage(register.get('bday')['errors']) }}
+                <mat-error
+                  *ngIf="
+                    register.get('dateOfBirth')['errors'] &&
+                    register.get('dateOfBirth').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("dateOfBirth")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
@@ -111,30 +217,51 @@
           <tr>
             <td colspan="3">
               <mat-form-field>
-                <input matInput placeholder="Wachtwoord" formControlName="password" [type]="hide1 ? 'text' : 'password'"
-                  required>
-                <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                <mat-error *ngIf="register.get('password')['errors']  && 
-                          register.get('password').touched">
-                  {{getErrorMessage(register.get('password')['errors']) }}
+                <input
+                  matInput
+                  placeholder="Wachtwoord"
+                  formControlName="password"
+                  [type]="hide1 ? 'text' : 'password'"
+                  required
+                />
+                <mat-icon matSuffix (click)="hide1 = !hide1">{{
+                  hide1 ? "visibility_off" : "visibility"
+                }}</mat-icon>
+                <mat-error
+                  *ngIf="
+                    register.get('password')['errors'] &&
+                    register.get('password').touched
+                  "
+                >
+                  {{ getErrorMessage(register.get("password")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
             <td colspan="3">
               <mat-form-field>
-                <input matInput placeholder="Bevestiging wachtwoord" formControlName="confirmPass"
-                  [type]="hide ? 'text' : 'password'" required [errorStateMatcher]="matcher">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <input
+                  matInput
+                  placeholder="Bevestiging wachtwoord"
+                  formControlName="confirmPass"
+                  [type]="hide ? 'text' : 'password'"
+                  required
+                  [errorStateMatcher]="matcher"
+                />
+                <mat-icon matSuffix (click)="hide = !hide">{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
                 <mat-error *ngIf="register.get('confirmPass')['errors']">
-                  {{getErrorMessage(register.get('confirmPass')['errors'])}} 
+                  {{ getErrorMessage(register.get("confirmPass")["errors"]) }}
                 </mat-error>
               </mat-form-field>
             </td>
           </tr>
           <tr>
-            <td colspan="6"><button type="submit" mat-button>
+            <td colspan="6">
+              <button type="submit" mat-button>
                 Registreren
-              </button></td>
+              </button>
+            </td>
           </tr>
         </table>
       </form>

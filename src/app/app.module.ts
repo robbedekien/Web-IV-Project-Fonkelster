@@ -6,7 +6,7 @@ import { ActivityComponent } from './activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatDatepicker, MatDatepickerModule, DateAdapter, MatNativeDateModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatDatepicker, MatDatepickerModule, DateAdapter, MatNativeDateModule, MatSelectModule } from '@angular/material';
 import {RouterModule, Routes} from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
+import { httpInterceptorProviders } from './http-interceptors/index';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,8 @@ import { AppRoutingModule } from './app-routing.module';
     ActivityComponent,
     MainNavComponent,
     PageNotFoundComponent,
-    RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +45,10 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

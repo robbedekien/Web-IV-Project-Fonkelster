@@ -15,6 +15,23 @@ $lightblue: #31C5D8;
 *{
     font-family: 'Fredoka One', cursive;
     color: #626263;
+    button{
+        color: white !important;
+        span{
+            color: white;
+        }
+    }
+}
+
+div.mat-calendar-controls{
+    button{
+        background-color: $yellow;
+        margin: 0.1em;
+        &:hover{
+            background-color: $orange;
+            transition: 0.5s;
+        }
+    }
 }
 .container{
     width: 60%;
