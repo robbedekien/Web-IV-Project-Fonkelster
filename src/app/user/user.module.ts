@@ -1,27 +1,34 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Location} from "../models/location.model";
 
+@Injectable({ providedIn: "root" })
+
 export class User {
-  constructor(
-    private _name: string,
-    private _firstName: string,
-    private _email: string,
-    private _location: Location,
-    private _DoB: Date,
-    private _gender: number,
-    private _password: string
-  ) {}
+  private _name: string;
+    private _firstName: string;
+    private _email: string;
+    private _location: Location;
+    private _DoB: Date;
+    private _gender: number;
+  constructor(name:string, firstName:string, email:string, location:Location, DoB:Date, gender:number
+  ) {
+    this._name = name;
+    this._firstName = firstName;
+    this._email = email;
+    this._location = location;
+    this._DoB = DoB;
+    this._gender = gender;
+  }
 
   static fromJSON(json: any): User {
     const u = new User(
-      json.lastName,
+      json.name,
       json.firstName,
       json.email,
-      json.location.fromJSON(),
+      Location.fromJSON(json.location),
       json.dateOfBirth,
-      json.gender,
-      json._password
+      json.gender
     );
     return u;
   }
@@ -29,7 +36,6 @@ export class User {
   toJson() {
     return {
       email: this.email,
-      password: this.password,
       firstName: this.firstName,
       lastName: this.name,
       dateOfBirth: this.DoB,
@@ -61,8 +67,5 @@ export class User {
     return this._gender;
   }
 
-  get password(): string {
-      return this._password;
-  }
 }
 

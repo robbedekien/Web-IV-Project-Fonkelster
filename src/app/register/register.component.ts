@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     private _fbl: FormBuilder,
     private _fbr: FormBuilder,
     private _adapter: DateAdapter<any>,
-    private _dataService: AuthenticationService,
+    private _authservice: AuthenticationService,
     private router: Router
   ) {}
 
@@ -58,8 +58,8 @@ export class RegisterComponent implements OnInit {
   get adapter(): DateAdapter<any> {
     return this._adapter;
   }
-  get dataService(): AuthenticationService {
-    return this._dataService;
+  get authService(): AuthenticationService {
+    return this._authservice;
   }
 
   validatePassword(control: FormGroup): { [key: string]: any } {
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
         email: [
           "",
           [Validators.required, Validators.email],
-          serverSideValidateUsername(this.dataService.checkUserNameAvailability)
+          serverSideValidateUsername(this.authService.checkUserNameAvailability)
         ],
         nr: ["", [Validators.required, this.validateNumber]],
         street: ["", [Validators.required]],
@@ -125,13 +125,13 @@ export class RegisterComponent implements OnInit {
   }
 
   logIn() {
-    this.dataService
+    this.authService
       .login(this.login.value.email, this.login.value.password)
       .subscribe(val => {
         if (val) {
-          if (this.dataService.redirectUrl) {
-            this.router.navigateByUrl(this.dataService.redirectUrl);
-            this.dataService.redirectUrl = undefined;
+          if (this.authService.redirectUrl) {
+            this.router.navigateByUrl(this.authService.redirectUrl);
+            this.authService.redirectUrl = undefined;
           } else {
             this.router.navigate(["/home"]);
           }
@@ -140,8 +140,7 @@ export class RegisterComponent implements OnInit {
   }
 
   Register() {
-    console.log("test");
-    this.dataService
+    this.authService
       .register(
         this.register.value.name,
         this.register.value.firstName,

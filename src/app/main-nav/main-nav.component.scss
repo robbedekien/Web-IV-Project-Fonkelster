@@ -41,8 +41,11 @@
 .navRight .navButton:nth-of-type(4){
   background-color: #46B72A;
 }
-.navRight .navButton:last-of-type{
+.navRight .navButton:nth-of-type(5){
   background-color: #31C5D8;
+}
+.fas{
+  color: #31C5D8;
 }
 .navToolbar{
   background-color: white;
@@ -74,12 +77,36 @@ mat-nav-list .navButton:nth-of-type(3){
 mat-nav-list .navButton:nth-of-type(4){
   background-color: #46B72A;
 }
-mat-nav-list .navButton:last-of-type{
+mat-nav-list .navButton:nth-of-type(5){
   background-color: #31C5D8;
 }
+
+.ng-dropdown-control{
+  background-color: #31C5D8;
+  text-align: center;
+  margin: 0.2em auto;
+  width: 60%;
+  color: white;
+  padding: 0.3em 0.6em;
+  margin-right: 0.5em;
+  border-radius: 50px;
+  bottom: 0px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ng-dropdown.ng-star-inserted{
+  display: inline;
+}
+
 
 .logo{
   min-width: 30%;
   max-width: 30%;
   height: auto;
+}
+
+.dropdowncontent{
+  display: flex;
+  flex-direction: column;
 }

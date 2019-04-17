@@ -1,4 +1,7 @@
-<mat-sidenav-container class="sidenav-container" style="background-color: white;">
+<mat-sidenav-container
+  class="sidenav-container"
+  style="background-color: white;"
+>
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -26,7 +29,26 @@
         <a href="#" class="navButton">Pagina 2</a>
         <a href="#" class="navButton">Pagina 3</a>
         <a href="#" class="navButton">Pagina 4</a>
-        <a [routerLink]="['register']" class="navButton">Log in</a>
+        <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
+          >Log in</a
+        >
+        <!-- <mat-expansion-panel style="display: inline-block;" *ngIf="user !== null">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Account
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <a [routerLink]="['account']" class="navButton" *ngIf="user !== null"
+            >Wijzig gegevens</a
+          >
+        </mat-expansion-panel> -->
+        <div ngDropdown *ngIf="user !== null">
+          <a ngDropdownControl>Account</a>
+          <div ngDropdownContent dropdownClass="slide-fade" class="dropdowncontent">
+            <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
+            <button class="navButton" (click)="logOut()">Log uit</button>
+          </div>
+        </div>
       </div>
       <button
         type="button"

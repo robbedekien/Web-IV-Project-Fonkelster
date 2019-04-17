@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Fredoka+One');
+@import '~angular-dropdown/styles';
 
 $blue: #008BD0;
 $red: #E50D0D;
@@ -12,48 +13,77 @@ $lightblue: #31C5D8;
 /*
     light-blue: 008BD0
 */
-*{
-    font-family: 'Fredoka One', cursive;
-    color: #626263;
-    button{
-        color: white !important;
-        span{
-            color: white;
-        }
+* {
+  font-family: 'Fredoka One', cursive;
+  color: #626263;
+
+  button {
+    color: white !important;
+
+    span {
+      color: white;
     }
+  }
 }
 
-div.mat-calendar-controls{
-    button{
-        background-color: $yellow;
-        margin: 0.1em;
-        &:hover{
-            background-color: $orange;
-            transition: 0.5s;
-        }
-    }
-}
-.container{
-    width: 60%;
-    margin: 0 auto;
-}
-.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
-    background-color: $blue;
-}
-
-button, .mat-button{
-    padding: 0.5em;
-    border-radius: 50px !important;
-    box-shadow: none;
-    border: none;
+div.mat-calendar-controls {
+  button {
     background-color: $yellow;
-    color: white;
-    &:hover{
-        background-color: $orange;
-        transition: 0.5s;
+    margin: 0.1em;
+
+    &:hover {
+      background-color: $orange;
+      transition: 0.5s;
     }
+  }
 }
 
-.mat-form-field{
-    min-width: 0 !important;
+.container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $blue;
+}
+
+button,
+.mat-button {
+  padding: 0.5em;
+  border-radius: 50px !important;
+  box-shadow: none;
+  border: none;
+  background-color: $yellow;
+  color: white;
+
+  &:hover {
+    background-color: $orange;
+    transition: 0.5s;
+  }
+}
+
+.mat-form-field {
+  min-width: 0 !important;
+}
+
+.ng-dropdown-content {
+  display: flex;
+  flex-direction: column;
+  right: 20px !important;
+  margin-top: 0.2em;
+  &>*{
+      background-color: #31C5D8;
+      margin: 0.1em 1em;
+      transition: none !important;
+      .navButton{
+        width: 80% !important;
+        margin: 0 !important;
+      }
+      &:hover{
+        cursor: pointer;
+        transition: none !important;
+        background-color: #31C5D8;
+      }
+  }
 }

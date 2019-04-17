@@ -1,0 +1,195 @@
+<h2>Wijzig gegevens</h2>
+<form
+  (ngSubmit)="Update()"
+  class="registerForm"
+  *ngIf="(user$ | async) as user; else loadingOrError"
+  [formGroup]="register"
+>
+  <table>
+    <tr>
+      <td colspan="3">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Voornaam"
+            formControlName="firstName"
+            value="{{ user.firstName }}"
+          />
+          <mat-error
+            *ngIf="
+              register.get('firstName')['errors'] &&
+              register.get('firstName').touched
+            "
+          >
+            {{ getErrorMessage(register.get("firstName")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td colspan="3">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Achternaam"
+            formControlName="name"
+            value="{{ user.name }}"
+          />
+          <mat-error
+            *ngIf="
+              register.get('name')['errors'] && register.get('name').touched
+            "
+          >
+            {{ getErrorMessage(register.get("name")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6" class="fullLength">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            value="{{ user.email }}"
+          />
+          <mat-error
+            *ngIf="
+              register.get('email')['errors'] && register.get('email').touched
+            "
+          >
+            {{ getErrorMessage(register.get("email")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Straat"
+            formControlName="street"
+            value="{{ user.location.street }}"
+          />
+          <mat-error
+            *ngIf="
+              register.get('street')['errors'] && register.get('street').touched
+            "
+          >
+            {{ getErrorMessage(register.get("street")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td colspan="2">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Nr"
+            formControlName="nr"
+            value="{{ user.location.nr }}"
+          />
+          <mat-error
+            *ngIf="register.get('nr')['errors'] && register.get('nr').touched"
+          >
+            {{ getErrorMessage(register.get("nr")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td colspan="2">
+        <mat-form-field>
+          <mat-label>Geslacht</mat-label>
+          <mat-select
+            [(value)]="selected"
+          >
+            <!-- <mat-option *ngFor="let gender of genders" [value]="gender">
+              {{ gender }}
+            </mat-option> -->
+            <mat-option value="1">Man</mat-option>
+            <mat-option value="2">Vrouw</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              register.get('gender')['errors'] && register.get('gender').touched
+            "
+          >
+            {{ getErrorMessage(register.get("gender")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Postcode"
+            formControlName="postal"
+            value="{{ user.location.postalCode }}"
+          />
+          <mat-error
+            *ngIf="
+              register.get('postal')['errors'] && register.get('postal').touched
+            "
+          >
+            {{ getErrorMessage(register.get("postal")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td colspan="2">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Stad"
+            formControlName="city"
+            value="{{ user.location.city }}"
+          />
+          <mat-error
+            *ngIf="
+              register.get('city')['errors'] && register.get('city').touched
+            "
+          >
+            {{ getErrorMessage(register.get("city")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td colspan="2">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Geboortedatum"
+            formControlName="dateOfBirth"
+            [matDatepicker]="picker"
+            value="{{ user.DoB }}"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            *ngIf="
+              register.get('dateOfBirth')['errors'] &&
+              register.get('dateOfBirth').touched
+            "
+          >
+            {{ getErrorMessage(register.get("dateOfBirth")["errors"]) }}
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="6">
+        <button type="submit" mat-button>
+          Wijzig
+        </button>
+      </td>
+    </tr>
+  </table>
+</form>
+<ng-template #loadingOrError>
+  <mat-card>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </mat-card>
+</ng-template>
