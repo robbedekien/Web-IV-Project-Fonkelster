@@ -4,12 +4,13 @@ import { User } from "./user.module";
 import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getUser(email: string): Observable<User> {
     return this.http.get(`${environment.apiUrl}/Member/getUser/${email}`).pipe(
@@ -32,16 +33,21 @@ export class UserDataService {
     city: string,
     dateOfBirth: Date
   ): void {
-    console.log("test");
-    this.http.post(`${environment.apiUrl}/Member/updateUser/`, 
-    {
-      name : lastName,
-      firstName,
-      email,
-      dateOfBirth,
-      gender,
-      location : {street, number:nr,postalCode, city}
-    });
+    this.http
+      .post(`${environment.apiUrl}/Member/updateUser/`, {
+        name: lastName,
+        firstName,
+        email,
+        dateOfBirth,
+        gender,
+        location: { street, number: nr, postalCode, city }
+      })
+      .subscribe(val => {
+        this.getUser(email).subscribe(user => {
+          localStorage.setItem("user", JSON.stringify(user));
+          this.router.navigate(["/home"]);
+        });
+      });
   }
 }
 

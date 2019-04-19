@@ -12,11 +12,18 @@
     position="end"
   >
     <mat-nav-list>
-      <a [routerLink]="['register']" class="navButton">Log in</a>
-      <a href="#" class="navButton">Pagina 1</a>
-      <a href="#" class="navButton">Pagina 2</a>
-      <a href="#" class="navButton">Pagina 3</a>
-      <a href="#" class="navButton">Pagina 4</a>
+      <a [routerLink]="['register']" class="navButton" *ngIf="user === null">Log in</a>
+      <div ngDropdown *ngIf="user !== null">
+        <a ngDropdownControl>Account</a>
+        <div ngDropdownContent dropdownClass="slide-fade" class="dropdowncontent">
+          <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
+          <button class="navButton" (click)="logOut()">Log uit</button>
+        </div>
+      </div>
+      <a href="#" class="navButton">Over</a>
+      <a [routerLink]="['activity']" class="navButton">Activiteiten</a>
+      <a href="#" class="navButton">Praktijk</a>
+      <a href="#" class="navButton">Contact</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -25,23 +32,13 @@
         <img src="../../assets/images/logo.png" alt="Logo" class="logo" />
       </a>
       <div *ngIf="!(isHandset$ | async)" class="navRight">
-        <a href="#" class="navButton">Pagina 1</a>
-        <a href="#" class="navButton">Pagina 2</a>
-        <a href="#" class="navButton">Pagina 3</a>
-        <a href="#" class="navButton">Pagina 4</a>
+        <a href="#" class="navButton">Over Fonkelster</a>
+        <a [routerLink]="['activity']" class="navButton">Activiteiten</a>
+        <a href="#" class="navButton">Praktijk</a>
+        <a href="#" class="navButton">Contact</a>
         <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
           >Log in</a
         >
-        <!-- <mat-expansion-panel style="display: inline-block;" *ngIf="user !== null">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Account
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a [routerLink]="['account']" class="navButton" *ngIf="user !== null"
-            >Wijzig gegevens</a
-          >
-        </mat-expansion-panel> -->
         <div ngDropdown *ngIf="user !== null">
           <a ngDropdownControl>Account</a>
           <div ngDropdownContent dropdownClass="slide-fade" class="dropdowncontent">

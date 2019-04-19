@@ -1,0 +1,12 @@
+.categories{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+    .mat-card{
+        margin: 0.5em;
+        width: 15%;
+        text-align: center;
+    }
+}

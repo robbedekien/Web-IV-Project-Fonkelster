@@ -1,3 +1,10 @@
+$blue: #008BD0;
+$red: #E50D0D;
+$orange: #F07306;
+$yellow: #F9B820;
+$green: #46B72A;
+$lightblue: #31C5D8;
+
 .navButton {
   color: white;
   padding: 0.3em 0.6em;
@@ -10,9 +17,24 @@
 .mat-form-field {
   width: 95%;
 }
+.fullLength{
+  width: 97.5% !important;
+}
+.changeForm{
+  display: flex;
+  justify-content: center;
+  form{
+    width: auto;
+    display: inline-block;
+    button{
+      display: block;
+      margin: 0 auto;
+      width: 20% !important;
+    }
+  }
+}
 
-form{
-  width: 80%;
-  margin: 0 auto;
-  display: block;
+h2{
+  color: $blue;
+  text-align: center;
 }

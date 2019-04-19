@@ -24,6 +24,9 @@ $lightblue: #31C5D8;
       color: white;
     }
   }
+  &:focus{
+    outline: none;
+  }
 }
 
 div.mat-calendar-controls {

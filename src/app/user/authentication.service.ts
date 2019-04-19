@@ -15,7 +15,7 @@ export class AuthenticationService {
   private _user$: BehaviorSubject<string>;
   private _redirectUrl: string;
 
-  constructor(private http: HttpClient, private dataService: UserDataService, private router: Router) {
+  constructor(private http: HttpClient, private dataService: UserDataService, private router: Router, private userDataService:UserDataService) {
     let parsedToken = parseJwt(localStorage.getItem(this._token));
     if (parsedToken) {
       const expires =
@@ -82,6 +82,7 @@ export class AuthenticationService {
         map((token: any) => {
           if (token) {
             localStorage.setItem(this._token, token);
+            this.userDataService.getUser(email).subscribe(user => {localStorage.setItem("user", JSON.stringify(user))});
             this._user$.next(email);
             return true;
           } else {

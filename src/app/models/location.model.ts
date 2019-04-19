@@ -1,25 +1,14 @@
 export class Location {
-  constructor(
-    private _street: string,
-    private _nr: number,
-    private _postalCode: number,
-    private _city: string
-  ) {}
-
-  get street(): string {
-    return this._street;
-  }
-
-  get nr(): number {
-    return this._nr;
-  }
-
-  get postalCode(): number {
-    return this._postalCode;
-  }
-
-  get city(): string {
-    return this._city;
+  street: string
+  number: number
+  postalCode: number
+  city: string
+  constructor(street:string, number:number, postalCode:number, city:string
+  ) {
+    this.street = street;
+    this.number = number;
+    this.postalCode = postalCode;
+    this.city = city;
   }
 
   static fromJSON(json: any): Location {
@@ -30,7 +19,7 @@ export class Location {
   public toJSON() {
     return {
       street: this.street,
-      number: this.nr,
+      number: this.number,
       postalCode: this.postalCode, 
       city: this.city
     };

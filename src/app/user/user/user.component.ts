@@ -14,7 +14,6 @@ import { DateAdapter } from "@angular/material";
 import { Observable, BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
 import { User } from "../user.module";
-import { template } from '@angular/core/src/render3';
 
 @Component({
   selector: "app-user",
@@ -26,8 +25,6 @@ export class UserComponent implements OnInit {
 
   private genders: string[] = ["Man", "Vrouw"];
   private user: User;
-
-  private _fetchUser$: Observable<User> = this.userDataService.getUser(this.authService.user$.value);
 
   selected;
 
@@ -53,30 +50,30 @@ export class UserComponent implements OnInit {
     return null;
   }
 
-  get user$(){
-    // this._fetchUser$.subscribe(val => console.log(val));
-    this._fetchUser$.subscribe(val => this.selected = val.gender.toString());
-    return this._fetchUser$;
-  }
-
   ngOnInit() {
+    if(localStorage.getItem("user") !== null)
+    {
+      this.user = JSON.parse(localStorage.getItem("user"));
+    }
+    this.selected = this.user.gender.toString();
     this.adapter.setLocale("nl");
     this.register = this.fbr.group(
       {
-        name: ["", [Validators.required]],
-        firstName: ["", [Validators.required]],
-        email: ["", [Validators.required, Validators.email]],
-        nr: ["", [Validators.required, this.validateNumber]],
-        street: ["", [Validators.required]],
-        city: ["", [Validators.required]],
+        name: [this.user.name, [Validators.required]],
+        firstName: [this.user.firstName, [Validators.required]],
+        email: [this.user.email, [Validators.required, Validators.email]],
+        nr: [this.user.location.number, [Validators.required, this.validateNumber]],
+        street: [this.user.location.street, [Validators.required]],
+        city: [this.user.location.city, [Validators.required]],
         postal: [
-          "",
+          this.user.location.postalCode,
           [Validators.required, this.validateNumber]
         ],
-        dateOfBirth: ["", [Validators.required]],
-        gender: ["", [Validators.required]]
+        dateOfBirth: [this.user.DoB, [Validators.required]],
+        gender: [this.user.gender, [Validators.required]]
       }
     );
+    this.register.controls.email.disable();
   }
 
   getErrorMessage(errors: any) {
@@ -110,5 +107,6 @@ export class UserComponent implements OnInit {
       this.register.value.city,
       this.register.value.dateOfBirth
     );
+    
   }
 }

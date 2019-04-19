@@ -5,20 +5,20 @@ import {Location} from "../models/location.model";
 @Injectable({ providedIn: "root" })
 
 export class User {
-  private _name: string;
-    private _firstName: string;
-    private _email: string;
-    private _location: Location;
-    private _DoB: Date;
-    private _gender: number;
+  name: string;
+  firstName: string;
+  email: string;
+  location: Location;
+  DoB: Date;
+  gender: number;
   constructor(name:string, firstName:string, email:string, location:Location, DoB:Date, gender:number
   ) {
-    this._name = name;
-    this._firstName = firstName;
-    this._email = email;
-    this._location = location;
-    this._DoB = DoB;
-    this._gender = gender;
+    this.name = name;
+    this.firstName = firstName;
+    this.email = email;
+    this.location = location;
+    this.DoB = DoB;
+    this.gender = gender;
   }
 
   static fromJSON(json: any): User {
@@ -42,29 +42,6 @@ export class User {
       gender: this.gender,
       location: this.location.toJSON()
     };
-  }
-
-  get name(): string {
-    return this._name;
-  }
-  get firstName(): string {
-    return this._firstName;
-  }
-
-  get email(): string {
-    return this._email;
-  }
-
-  get location(): Location {
-    return this._location;
-  }
-
-  get DoB(): Date {
-    return this._DoB;
-  }
-
-  get gender(): number {
-    return this._gender;
   }
 
 }
