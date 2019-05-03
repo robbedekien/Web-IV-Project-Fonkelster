@@ -1,0 +1,21 @@
+<div class="activity-header">
+    <h1>Activiteiten</h1>
+    <div>
+      Gelieve een categorie te kiezen
+    </div>
+  </div>
+  <div class="categories">
+    <div *ngFor="let categorie of categories" class="category">
+        <mat-card [routerLink]="['../categorie/', categorie.name]" class="category-card" >
+            <mat-card-header>
+              <mat-card-title>{{categorie.name}}</mat-card-title>
+            </mat-card-header>
+              <img
+                mat-card-image
+                src= {{categorie.image}}
+                alt="Foto van categorie"
+              />
+          </mat-card>
+    </div>
+  </div>
+  

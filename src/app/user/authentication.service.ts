@@ -53,7 +53,7 @@ export class AuthenticationService {
           lastName,
           dateOfBirth,
           gender,
-          location: { street, nr, postalCode, city },
+          location: { street, number:nr, postalCode, city },
           passwordConfirmation
         },
         { responseType: "text" }
@@ -62,6 +62,7 @@ export class AuthenticationService {
         map((token: any) => {
           if (token) {
             localStorage.setItem(this._token, token);
+            this.userDataService.getUser(email).subscribe(user => {localStorage.setItem("user", JSON.stringify(user))});
             this._user$.next(email);
             return true;
           } else {

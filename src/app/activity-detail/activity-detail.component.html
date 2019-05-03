@@ -1,0 +1,18 @@
+<h2>{{ activity.name }}</h2>
+<div class="activityContainer">
+  <div class="description">
+    <p>{{ activity.description }}</p>
+    <button>Inschrijven</button>
+  </div>
+  <div class="images">
+    <div style="height: 100%;">
+      <div *ngFor="let image of activity.images | paginate: {itemsPerPage: 2, currentPage: p }">
+        <img src="{{ image }}" alt="{{ activity.name }}" />
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+<div class="calendar">
+    
+</div>

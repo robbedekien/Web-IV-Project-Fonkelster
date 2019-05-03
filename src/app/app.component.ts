@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Activity } from './activity.model';
-import { ActivityDataService } from 'src/activity-data.service';
+import { Activity } from './models/activity.model';
+import { ActivityDataService } from 'src/app/activity/activity-data.service';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +14,7 @@ export class AppComponent {
 
   constructor(private _activityDataService: ActivityDataService) {}
 
-  get activities$(): Observable<Activity[]>{
-    return this._fetchActivities$;
+  ngOnInit(){
+    
   }
-  
 }

@@ -21,7 +21,7 @@
         </div>
       </div>
       <a href="#" class="navButton">Over</a>
-      <a [routerLink]="['activity']" class="navButton">Activiteiten</a>
+      <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
       <a href="#" class="navButton">Praktijk</a>
       <a href="#" class="navButton">Contact</a>
     </mat-nav-list>
@@ -33,7 +33,7 @@
       </a>
       <div *ngIf="!(isHandset$ | async)" class="navRight">
         <a href="#" class="navButton">Over Fonkelster</a>
-        <a [routerLink]="['activity']" class="navButton">Activiteiten</a>
+        <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
         <a href="#" class="navButton">Praktijk</a>
         <a href="#" class="navButton">Contact</a>
         <a [routerLink]="['register']" class="navButton" *ngIf="user === null"

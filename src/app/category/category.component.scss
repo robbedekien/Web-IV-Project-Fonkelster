@@ -13,13 +13,13 @@ $lightblue: #31C5D8;
   }
 }
 
-.activities {
+.categories {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 80%;
   margin: 0 auto;
-  .activity {
+  .category {
     display: inline-block;
     width: 20%;
     text-align: center;
@@ -45,6 +45,11 @@ $lightblue: #31C5D8;
 
 
 
-.activity-card {
+.category-card {
   cursor: pointer;
+  border: none;
+  box-shadow: none;
+  .mat-card-image{
+    border-radius: 2px;
+  }
 }

@@ -1,0 +1,43 @@
+$blue: #008BD0;
+$red: #E50D0D;
+$orange: #F07306;
+$yellow: #F9B820;
+$green: #46B72A;
+$lightblue: #31C5D8;
+
+h2{
+    margin: 2em;
+    text-align: center;
+    color: $blue;
+}
+
+.activityContainer{
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    .description{
+        width: 50%;
+        button{
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            padding: 0.5em 1em;
+        }
+        p{
+            margin: 0 1em 1em 0;
+        }
+    }
+    .images{
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        &>div>div{
+            max-width: 48%;
+            margin: 0.1em;
+            display: inline-block;
+            img{
+                max-width: 100%;
+            }
+        }
+    }
+}

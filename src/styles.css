@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 /*# sourceMappingURL=styles.css.map */
 @import url('https://fonts.googleapis.com/css?family=Fredoka+One');
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 *{
     font-family: 'Fredoka One', cursive !important;

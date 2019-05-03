@@ -7,5 +7,6 @@
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
-  ]
+  ],
+  "flatpickr": [ "../node_modules/flatpickr/dist/flatpickr.min.js" ]
 }
