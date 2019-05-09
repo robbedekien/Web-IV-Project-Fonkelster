@@ -29,6 +29,10 @@ export class MainNavComponent {
     return this._user$.getValue();
   }
   
+  isAdmin():boolean {
+    return this._user$.getValue() === "robbe.dekien@hotmail.com";
+  }
+
   logOut(){
     this.authService.logout();
   }

@@ -6,7 +6,7 @@
   </div>
   <div class="images">
     <div style="height: 100%;">
-      <div *ngFor="let image of activity.images | paginate: {itemsPerPage: 2, currentPage: p }">
+      <div *ngFor="let image of activity.images | paginate: {itemsPerPage: 4, currentPage: p }">
         <img src="{{ image }}" alt="{{ activity.name }}" />
       </div>
       <pagination-controls (pageChange)="p = $event"></pagination-controls>

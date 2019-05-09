@@ -40,7 +40,15 @@ export class CategoryComponent implements OnInit {
   }
 
   get categories() {
-    return _.uniqWith(this._categories, _.isEqual);
+    return _.uniqWith(this._categories, _.isEqual).sort((a: any, b: any) => {
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });;
   }
 
   

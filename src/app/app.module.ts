@@ -20,6 +20,8 @@ import { CategoryComponent } from './category/category.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ActivityOperationsComponent } from './activity-operations/activity-operations.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterComponent,
     UserComponent,
     CategoryComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    ActivityOperationsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AngularDropdownModule,
     MatProgressSpinnerModule,
     NgbModalModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MaterialFileInputModule
     ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

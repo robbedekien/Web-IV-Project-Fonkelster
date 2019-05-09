@@ -22,6 +22,7 @@
       </div>
       <a href="#" class="navButton">Over</a>
       <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
+      <a [routerLink]="['wijzigActiviteit']" class="navButton" *ngIf="isAdmin()">Activiteit toevoegen</a>
       <a href="#" class="navButton">Praktijk</a>
       <a href="#" class="navButton">Contact</a>
     </mat-nav-list>
@@ -34,6 +35,7 @@
       <div *ngIf="!(isHandset$ | async)" class="navRight">
         <a href="#" class="navButton">Over Fonkelster</a>
         <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
+        <a [routerLink]="['wijzigActiviteit']" class="navButton" *ngIf="isAdmin()">Activiteit toevoegen</a>
         <a href="#" class="navButton">Praktijk</a>
         <a href="#" class="navButton">Contact</a>
         <a [routerLink]="['register']" class="navButton" *ngIf="user === null"

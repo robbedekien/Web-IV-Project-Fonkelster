@@ -32,16 +32,16 @@
 .navRight .navButton:first-of-type{
   background-color: #e50d0d;
 }
-.navRight .navButton:nth-of-type(2){
+.navRight .navButton:nth-of-type(2), .navRight .navButton:nth-of-type(3){
   background-color: rgb(240, 115, 6);
 }
-.navRight .navButton:nth-of-type(3){
+.navRight .navButton:nth-last-child(3){
   background-color: #F9B820;
 }
-.navRight .navButton:nth-of-type(4){
+.navRight .navButton:nth-last-child(2){
   background-color: #46B72A;
 }
-.navRight .navButton:nth-of-type(5){
+.navRight .navButton:nth-last-child(1){
   background-color: #31C5D8;
 }
 .fas{
@@ -68,16 +68,16 @@ mat-nav-list .navButton{
 mat-nav-list .navButton:first-of-type{
   background-color: #e50d0d;
 }
-mat-nav-list .navButton:nth-of-type(2){
+mat-nav-list .navButton:nth-of-type(2), mat-nav-list .navButton:nth-of-type(3){
   background-color: rgb(240, 115, 6);
 }
-mat-nav-list .navButton:nth-of-type(3){
+mat-nav-list .navButton:nth-last-child(3){
   background-color: #F9B820;
 }
-mat-nav-list .navButton:nth-of-type(4){
+mat-nav-list .navButton:nth-last-child(2){
   background-color: #46B72A;
 }
-mat-nav-list .navButton:nth-of-type(5){
+mat-nav-list .navButton:nth-last-child(1){
   background-color: #31C5D8;
 }
 

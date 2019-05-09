@@ -2,8 +2,6 @@ import { NgModule, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Location} from "../models/location.model";
 
-@Injectable({ providedIn: "root" })
-
 export class User {
   name: string;
   firstName: string;

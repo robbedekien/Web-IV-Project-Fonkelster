@@ -99,7 +99,7 @@ export class UserComponent implements OnInit {
     this.userDataService.updateUser(
       this.register.value.name,
       this.register.value.firstName,
-      this.register.value.email,
+      this.user.email,
       this.register.value.street,
       this.register.value.nr,
       this.register.value.gender,

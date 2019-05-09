@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
 
   validateNumber(control: FormControl): { [key: string]: any } {
     if (isNaN(control.value)) {
-      return { notNumber: true };
+      return { notNumber: true }; 
     }
     return null;
   }

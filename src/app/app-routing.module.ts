@@ -8,11 +8,13 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user/user.component';
 import { CategoryComponent } from './category/category.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { ActivityOperationsComponent } from './activity-operations/activity-operations.component';
 
 const appRoutes: Routes = [
   { path: 'categorieën', component: CategoryComponent },
   { path: 'categorie/:category', component: ActivityComponent},
   { path: 'activiteit/:activityId', component: ActivityDetailComponent},
+  { path: 'wijzigActiviteit', component: ActivityOperationsComponent},
   { path: 'home', component: HomeComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'register', component: RegisterComponent},
