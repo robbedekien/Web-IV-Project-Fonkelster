@@ -2,7 +2,7 @@
 <div class="activityContainer">
   <div class="description">
     <p>{{ activity.description }}</p>
-    <button>Inschrijven</button>
+    <button (click) = "register()">Inschrijven</button>
   </div>
   <div class="images">
     <div style="height: 100%;">
@@ -12,7 +12,4 @@
       <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
-</div>
-<div class="calendar">
-    
 </div>

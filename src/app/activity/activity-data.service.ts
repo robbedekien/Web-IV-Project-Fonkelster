@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class ActivityDataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   get activities$(): Observable<Activity[]> {
     return this.http
@@ -36,4 +36,12 @@ export class ActivityDataService {
       { responseType: "text" }
     )
   }
+
+  register(email: string, id: Number) {
+    this.http.post(
+      `${environment.apiUrl}/Activity/${id}/Register/${email}`, { id, email }
+    ).subscribe(value => console.log("test"))
+  }
+
+
 }

@@ -40,10 +40,13 @@ export class ActivityOperationsComponent implements OnInit {
 
   ngOnInit() {
     this.adapter.setLocale("nl");
+    this.adapter.getFirstDayOfWeek = () => { return 1; }
     this.activity = this.fba.group(
       {
         name: ["", [Validators.required], serverSideValidateCategoryName(this._activityService.checkCategoryNameAvailability)],
-        description: ["", [Validators.required]]
+        description: ["", [Validators.required]],
+        start: ["", [Validators.required]],
+        end: ["", [Validators.required]]
       }
     );
 

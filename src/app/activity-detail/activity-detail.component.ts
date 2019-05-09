@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Activity } from '../models/activity.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../user/authentication.service';
+import { ActivityDataService } from '../activity/activity-data.service';
 
 @Component({
   selector: 'app-activity-detail',
@@ -9,10 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ActivityDetailComponent implements OnInit {
 
-  activity : Activity;
+  activity: Activity;
   p: number = 1;
 
-  constructor(private route : ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private authService: AuthenticationService, private router: Router, private activityService : ActivityDataService) { }
 
   ngOnInit() {
     if (localStorage.getItem("Activities") !== null) {
@@ -26,4 +28,13 @@ export class ActivityDetailComponent implements OnInit {
     console.log(this.activity);
 
   }
+
+  register() {
+    if (this.authService.user$.value === null) {
+      this.router.navigate(["/register"]);
+    } else {
+      this.activityService.register(this.authService.user$.value, this.activity.id);
+    }
+  }
+
 }
