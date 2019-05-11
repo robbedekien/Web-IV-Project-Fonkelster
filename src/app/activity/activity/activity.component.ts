@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Activity } from "../models/activity.model";
-import { ActivityDataService } from "./activity-data.service";
+import { Activity } from "../../models/activity.model";
+import { ActivityDataService } from "../activity-data.service";
 import { Observable } from "rxjs";
-import { Category } from "../models/category.model";
+import { Category } from "../../models/category.model";
 import * as _ from "lodash";
 import { ActivatedRoute } from "@angular/router";
 

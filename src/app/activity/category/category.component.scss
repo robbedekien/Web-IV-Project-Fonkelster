@@ -36,14 +36,16 @@ $lightblue: #31C5D8;
             align-items: center;
 
         }
-        .mat-card-header-text{
-        }
       }
   }
   
 }
 
-
+.loading {
+  display: block;
+  width: 10%;
+  margin: 2em auto;
+}
 
 .category-card {
   cursor: pointer;

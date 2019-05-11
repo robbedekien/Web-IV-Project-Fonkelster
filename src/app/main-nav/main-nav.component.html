@@ -12,17 +12,25 @@
     position="end"
   >
     <mat-nav-list>
-      <a [routerLink]="['register']" class="navButton" *ngIf="user === null">Log in</a>
+      <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
+        >Log in</a
+      >
       <div ngDropdown *ngIf="user !== null">
         <a ngDropdownControl>Account</a>
-        <div ngDropdownContent dropdownClass="slide-fade" class="dropdowncontent">
+        <div
+          ngDropdownContent
+          dropdownClass="slide-fade"
+          class="dropdowncontent"
+        >
           <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
           <button class="navButton" (click)="logOut()">Log uit</button>
         </div>
       </div>
       <a href="#" class="navButton">Over</a>
       <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
-      <a [routerLink]="['wijzigActiviteit']" class="navButton" *ngIf="isAdmin()">Activiteit toevoegen</a>
+      <a [routerLink]="['wijzigActiviteit']" class="navButton" *ngIf="isAdmin()"
+        >Activiteit toevoegen</a
+      >
       <a href="#" class="navButton">Praktijk</a>
       <a href="#" class="navButton">Contact</a>
     </mat-nav-list>
@@ -35,7 +43,12 @@
       <div *ngIf="!(isHandset$ | async)" class="navRight">
         <a href="#" class="navButton">Over Fonkelster</a>
         <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
-        <a [routerLink]="['wijzigActiviteit']" class="navButton" *ngIf="isAdmin()">Activiteit toevoegen</a>
+        <a
+          [routerLink]="['wijzigActiviteit']"
+          class="navButton"
+          *ngIf="isAdmin()"
+          >Activiteit toevoegen</a
+        >
         <a href="#" class="navButton">Praktijk</a>
         <a href="#" class="navButton">Contact</a>
         <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
@@ -43,9 +56,16 @@
         >
         <div ngDropdown *ngIf="user !== null">
           <a ngDropdownControl>Account</a>
-          <div ngDropdownContent dropdownClass="slide-fade" class="dropdowncontent">
+          <div
+            ngDropdownContent
+            dropdownClass="slide-fade"
+            class="dropdowncontent"
+          >
+            <a [routerLink]="['overzichtInschrijvingen']" class="navButton"
+              >Overzicht inschrijvingen</a
+            >
             <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
-            <button class="navButton" (click)="logOut()">Log uit</button>
+            <a class="navButton" (click)="logOut()">Log uit</a>
           </div>
         </div>
       </div>
@@ -54,7 +74,7 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="(isHandset$ | async)"
+        *ngIf="isHandset$ | async"
       >
         <mat-icon aria-label="Side nav toggle icon"
           ><i class="fas fa-bars"></i

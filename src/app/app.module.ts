@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { ActivityComponent } from './activity/activity.component';
+import { ActivityComponent } from './activity/activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -16,12 +16,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { UserComponent } from './user/user/user.component';
 import { AngularDropdownModule } from 'angular-dropdown';
-import { CategoryComponent } from './category/category.component';
-import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { CategoryComponent } from './activity/category/category.component';
+import { ActivityDetailComponent } from './activity/activity-detail/activity-detail.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ActivityOperationsComponent } from './activity-operations/activity-operations.component';
+import { ActivityOperationsComponent } from './activity/activity-operations/activity-operations.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MemberActivitiesComponent } from './user/member-activities/member-activities.component';
+import { registerLocaleData } from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
+import {LOCALE_ID} from '@angular/core';
+
+registerLocaleData(localeNl, 'nl');
 
 
 @NgModule({
@@ -35,7 +41,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     UserComponent,
     CategoryComponent,
     ActivityDetailComponent,
-    ActivityOperationsComponent
+    ActivityOperationsComponent,
+    MemberActivitiesComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +72,9 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     NgxPaginationModule,
     MaterialFileInputModule
     ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, { provide: LOCALE_ID, useValue: 'nl' }],
   bootstrap: [AppComponent],
   exports: [ActivityDetailComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

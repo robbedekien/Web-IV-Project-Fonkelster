@@ -245,7 +245,6 @@
                   formControlName="confirmPass"
                   [type]="hide ? 'text' : 'password'"
                   required
-                  [errorStateMatcher]="matcher"
                 />
                 <mat-icon matSuffix (click)="hide = !hide">{{
                   hide ? "visibility_off" : "visibility"

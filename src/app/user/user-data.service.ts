@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
+import { Activity } from '../models/activity.model';
 
 @Injectable({
   providedIn: "root"
@@ -49,6 +50,15 @@ export class UserDataService {
         });
       });
   }
+
+  getActivities(email:string): Observable<Activity[]> {
+    return this.http
+      .get(`${environment.apiUrl}/Member/getActivities/${email}`)
+      .pipe(map((list: any[]): Activity[] => list.map(Activity.fromJSON))); 
+  }
+
+
+
 }
 
 function parseJwt(token) {

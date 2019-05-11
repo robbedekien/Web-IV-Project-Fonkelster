@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
-import { Activity } from "../models/activity.model";
-import { Category } from "../models/category.model";
-import { ActivityDataService } from "../activity/activity-data.service";
+import { Activity } from "../../models/activity.model";
+import { Category } from "../../models/category.model";
+import { ActivityDataService } from "../activity-data.service";
 import * as _ from "lodash";
 import { Router } from "@angular/router";
 
@@ -13,7 +13,8 @@ import { Router } from "@angular/router";
 })
 export class CategoryComponent implements OnInit {
   private _fetchActivities$: Observable<Activity[]> = this.activityDataService
-    .activities$;
+    .activities$; 
+  public loading: Boolean;
   private _categories: Category[];
   constructor(
     private activityDataService: ActivityDataService,
@@ -21,18 +22,13 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (localStorage.getItem("Activities") === null) {
+    this.loading = true;
       this._fetchActivities$.subscribe(as => {
         localStorage.setItem("Activities", JSON.stringify(as));
         this._categories = as.map(a => a.category);
+        setTimeout(()=>{this.loading = false;}, 1000);
       });
-    } else 
-    {
-      this._categories = JSON.parse(localStorage
-        .getItem("Activities"))
-        .map(a => a.category);
-    }
-      
+    
   }
 
   get activities$() {

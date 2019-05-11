@@ -38,8 +38,13 @@ function serverSideValidateUsername(
 export class RegisterComponent implements OnInit {
   public register: FormGroup;
   public login: FormGroup;
+  public detour: String;
+  public genders: string[] = ["Man", "Vrouw"];
 
-  private genders: string[] = ["Man", "Vrouw"];
+  public hidel: boolean;
+  public hide1: boolean;
+  public hide: boolean;
+  
 
   constructor(
     private _fbl: FormBuilder,
@@ -77,6 +82,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem("detour") !== null)
+    {
+      this.detour = localStorage.getItem("detour");
+    }
     this.adapter.setLocale("nl");
     this.register = this.fbr.group(
       {
@@ -156,7 +165,12 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe(val => {
         if (val) {
-          this.router.navigate(["/home"]);
+          if (this.authService.redirectUrl) {
+            this.router.navigateByUrl(this.authService.redirectUrl);
+            this.authService.redirectUrl = undefined;
+          } else {
+            this.router.navigate(["/home"]);
+          }
         }
       });
   }

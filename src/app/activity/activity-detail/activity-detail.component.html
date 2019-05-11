@@ -2,7 +2,13 @@
 <div class="activityContainer">
   <div class="description">
     <p>{{ activity.description }}</p>
-    <button (click) = "register()">Inschrijven</button>
+    <img src="../../assets/images/loading.gif" alt="laden" *ngIf="isLoading; else doneLoading" class="loader">
+    <ng-template #doneLoading>
+      <button (click) = "register()" *ngIf="!isRegistered; else notRegistered">Inschrijven</button>
+      <ng-template #notRegistered>
+        <button (click) = "unsubscribe()">Uitschrijven</button>
+      </ng-template>
+    </ng-template>
   </div>
   <div class="images">
     <div style="height: 100%;">
