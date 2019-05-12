@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { Category } from "../../models/category.model";
 import * as _ from "lodash";
 import { ActivatedRoute } from "@angular/router";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "app-activity",
@@ -14,6 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 export class ActivityComponent implements OnInit {
   private _activities: Activity[];
   private _selectedActivities: Activity[];
+  public backend: string = environment.backend;
 
   constructor(private route: ActivatedRoute) {}
 

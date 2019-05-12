@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'categorieën', component: CategoryComponent },
   { path: 'categorie/:category', component: ActivityComponent},
   { path: 'activiteit/:activityId', component: ActivityDetailComponent},
-  { path: 'wijzigActiviteit', component: ActivityOperationsComponent},
+  { path: 'wijzigActiviteit/:Id/:sort', component: ActivityOperationsComponent},
   { path: 'overzichtInschrijvingen', component: MemberActivitiesComponent},
   { path: 'home', component: HomeComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'},

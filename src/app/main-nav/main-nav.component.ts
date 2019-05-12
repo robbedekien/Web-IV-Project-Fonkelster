@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { User } from "../user/user.module";
 import { AuthenticationService } from "../user/authentication.service";
 import { UserDataService } from "../user/user-data.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "app-main-nav",
@@ -30,7 +31,7 @@ export class MainNavComponent {
   }
   
   isAdmin():boolean {
-    return this._user$.getValue() === "robbe.dekien@hotmail.com";
+    return this._user$.getValue() === environment.adminEmail;
   }
 
   logOut(){

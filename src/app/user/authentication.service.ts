@@ -94,7 +94,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    console.log(this.user$.getValue());
     if (this.user$.getValue()) {
       localStorage.removeItem("currentUser");
       this._user$.next(null);

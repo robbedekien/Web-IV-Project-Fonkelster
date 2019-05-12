@@ -8,11 +8,13 @@ import {
 } from "@angular/forms";
 import { DateAdapter } from "@angular/material";
 import { ActivityDataService } from "../activity-data.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpEventType } from "@angular/common/http";
 import { Category } from "src/app/models/category.model";
+import { forEach } from "@angular/router/src/utils/collection";
+import { Activity } from "src/app/models/activity.model";
 
 @Component({
   selector: "app-activity-operations",
@@ -22,18 +24,23 @@ import { Category } from "src/app/models/category.model";
 export class ActivityOperationsComponent implements OnInit {
   activity: FormGroup;
   category: FormGroup;
-  p : number = 1;
+  p: number = 1;
   imgURL: any;
   public frontImageIndex: number;
   public categories: Category[];
   public activityImages: string[] = [];
+  public sort: number;
+  public concreteCategory: Category;
+  public concreteActivity: Activity;
+  public loading: Boolean;
 
   constructor(
     private _fba: FormBuilder,
     private _fbc: FormBuilder,
     private _adapter: DateAdapter<any>,
     private _activityService: ActivityDataService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   get fba(): FormBuilder {
@@ -50,6 +57,7 @@ export class ActivityOperationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.adapter.setLocale("nl");
     this.adapter.getFirstDayOfWeek = () => {
       return 1;
@@ -82,6 +90,31 @@ export class ActivityOperationsComponent implements OnInit {
       ],
       image: ["", [Validators.required]]
     });
+
+    this.route.paramMap.subscribe(pa => {
+      if (pa.get("sort") === "activity") {
+        this.sort = 0;
+      } else {
+        this.sort = 1;
+      }
+      if (pa.get("Id") != "-1") {
+        if (this.sort === 0) {
+          this.activityService.getActivity(pa.get("Id")).subscribe(val => {
+            this.concreteActivity = val;
+            console.log(this.concreteActivity);
+            this.loading = false;
+          })
+        } else {
+          this.activityService.getCategory(pa.get("Id")).subscribe(val => {
+            this.concreteCategory = val;
+            console.log(this.concreteCategory);
+            this.loading = false;
+          });
+        }
+      } else {
+        this.loading = false;
+      }
+    });
   }
 
   getErrorMessage(errors: any) {
@@ -107,7 +140,7 @@ export class ActivityOperationsComponent implements OnInit {
         let reader = new FileReader();
         reader.onload = (e: any) => {
           this.activityImages.push(e.target.result);
-        }
+        };
         reader.readAsDataURL(file);
       }
     }
@@ -127,8 +160,7 @@ export class ActivityOperationsComponent implements OnInit {
   removeImageCategory() {
     this.imgURL = "";
   }
-  removeImageActivity()
-  {
+  removeImageActivity() {
     this.activityImages = [];
   }
 
@@ -150,13 +182,20 @@ export class ActivityOperationsComponent implements OnInit {
 
   addActivity() {
     this.activityService
-      .uploadFile(this.category.value.image.files)
+      .uploadFile(this.activity.value.image.files)
       .subscribe(event => {
         var urls = this.fromJSON(event);
         this.activityService
-          .addCategory(this.category.value.name, urls[0])
+          .addActvity(
+            this.activity.value.name,
+            this.activity.value.description,
+            this.activity.value.start,
+            this.activity.value.end,
+            this.activity.value.categories.name,
+            urls[this.frontImageIndex],
+            urls
+          )
           .subscribe(val => {
-            console.log(val);
             if (val) {
               this.router.navigate(["/home"]);
             }
@@ -169,19 +208,28 @@ export class ActivityOperationsComponent implements OnInit {
     return res;
   }
 
-  frontImage(url:string){
+  frontImage(url: string) {
     this.frontImageIndex = this.activityImages.indexOf(url);
-    console.log(this.frontImageIndex);
-    for(let i=0; i < this.activityImages.length; i++)
-    {
-      console.log(document.getElementById(i.toString()));
-      // document.getElementById(i.toString()).classList.remove("selected");
+    var indexes: number[] = [];
+    for (let i = 4 * (this.p - 1); i < 4 * this.p - this.getDifference(); i++) {
+      indexes.push(i);
     }
-    document.getElementById(this.frontImageIndex.toString()).classList.add("selected");
-    console.log(document.getElementById(this.frontImageIndex.toString()));
 
+    indexes.forEach(i => {
+      document.getElementById(i.toString()).classList.remove("selected");
+    });
+
+    document
+      .getElementById(this.frontImageIndex.toString())
+      .classList.add("selected");
+    console.log(document.getElementById(this.frontImageIndex.toString()));
   }
 
+  getDifference() {
+    var res = 4 - (this.activityImages.length % 4);
+    if (res === 4) return 0;
+    return res;
+  }
 }
 
 function serverSideValidateCategoryName(

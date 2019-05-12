@@ -9,7 +9,7 @@
       </mat-card-header>
       <img
         mat-card-image
-        src={{activity.frontImage}}
+        [src]="backend + activity.frontImage"
         alt="Foto van activiteit"
       />
     </mat-card>

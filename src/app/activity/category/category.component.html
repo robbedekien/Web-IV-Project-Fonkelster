@@ -15,11 +15,16 @@
       </mat-card-header>
       <img
         mat-card-image
-        src="{{ categorie.image.url }}"
+        [src]="backend + categorie.image.url"
         alt="Foto van categorie"
       />
+      <div *ngIf="isAdmin">
+          <button [routerLink]="['../wijzigActiviteit', categorie.name, 'category']" style="margin-right: 0.5em;">Wijzig</button>
+          <button (click)="delete(categorie)" style="background-color: #E50D0D">Verwijder</button>
+      </div>
     </mat-card>
   </div>
+  <p style="text-align: center" *ngIf="categories.length === 0">Er zijn geen categorieën beschikbaar</p>
 </div>
 <ng-template #spinner>
   <img src="../../../assets/images/loading.gif" alt="loading" class="loading" />

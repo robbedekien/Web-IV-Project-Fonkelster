@@ -3,6 +3,7 @@ import { Activity } from "../../models/activity.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../../user/authentication.service";
 import { ActivityDataService } from "../activity-data.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: "app-activity-detail",
@@ -14,7 +15,9 @@ export class ActivityDetailComponent implements OnInit {
   public p: number = 1;
   public isRegistered: Boolean;
   public isLoading: Boolean;
-  
+  public isAdmin: Boolean;
+  public backend: string = environment.backend;
+
   constructor(
     private route: ActivatedRoute,
     private authService: AuthenticationService,
@@ -38,7 +41,6 @@ export class ActivityDetailComponent implements OnInit {
         .checkRegistered(this.authService.user$.value, this.activity.id)
         .subscribe(value => {
           this.isRegistered = value;
-          console.log(this.isRegistered);
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);
@@ -47,7 +49,10 @@ export class ActivityDetailComponent implements OnInit {
       this.isLoading = false;
     }
 
-    console.log(this.activity);
+    this.isAdmin = (this.authService.user$.value === environment.adminEmail);
+    console.log(this.authService.user$.value);
+    console.log(environment.adminEmail);
+    console.log(this.isAdmin);
   }
 
   register() {
@@ -73,5 +78,9 @@ export class ActivityDetailComponent implements OnInit {
     this.isRegistered = false;
     this.isLoading = true;
     setTimeout(()=>{this.isLoading = false}, 1000);
+  }
+
+  delete() {
+    this.activityService.deleteActivity(this.activity.id).subscribe(val => this.router.navigate(["/categorieën"]));
   }
 }

@@ -48,3 +48,15 @@ h2{
         }
     }
 }
+
+.operationButtons{
+    display: flex;
+    justify-content: flex-end;
+    width: 60%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    margin-top: -4.5em;
+    &>div{
+        margin-right: 1em;
+    }
+}

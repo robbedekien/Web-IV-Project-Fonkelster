@@ -1,4 +1,4 @@
-<mat-tab-group dynamicHeight class="tabgroup" mat-align-tabs="center">
+<mat-tab-group dynamicHeight class="tabgroup" mat-align-tabs="center" [selectedIndex]="sort" *ngIf="!loading">
   <mat-tab label="Activiteit toevoegen" style="margin-top: 1em;">
     <div class="mat-elevation-z4 tabcontent">
       <div class="activitycontainer">

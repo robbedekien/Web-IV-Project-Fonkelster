@@ -55,3 +55,11 @@ $lightblue: #31C5D8;
     border-radius: 2px;
   }
 }
+
+button{
+  cursor: pointer;
+  &:hover{
+    transition: 0.5s; 
+    background-color: #F07306 !important;
+  }
+}
