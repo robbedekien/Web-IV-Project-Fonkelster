@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  public prefix : string;
-
+  public imagePrefix : string;
+  
   constructor() { }
 
   ngOnInit() {
-    this.prefix = environment.imagePrefix;
+    this.imagePrefix = environment.imagePrefix;
   }
 
 }

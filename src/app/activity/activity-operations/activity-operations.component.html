@@ -32,7 +32,7 @@
                 <td colspan="1">
                   <mat-form-field>
                     <mat-label>Categorie</mat-label>
-                    <mat-select matInput formControlName="categories" required>
+                    <mat-select matInput formControlName="categories" required [(value)]="selected">
                       <mat-option
                         *ngFor="let category of categories"
                         [value]="category"
@@ -184,7 +184,7 @@
             ></pagination-controls>
           </div>
         </div>
-        <button type="submit" mat-button form="activityForm">
+        <button id="activitySubmit" type="submit" mat-button form="activityForm">
           Voeg activiteit toe
         </button>
       </div>
@@ -255,7 +255,7 @@
             </tr>
             <tr>
               <td>
-                <button type="submit" mat-button>
+                <button id="categorySubmit" type="submit" mat-button>
                   Voeg categorie toe
                 </button>
               </td>

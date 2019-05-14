@@ -38,7 +38,7 @@
   <mat-sidenav-content>
     <mat-toolbar class="navToolbar">
       <a [routerLink]="['home']">
-        <img src="https://localhost:44337/Resources/Images/logo.png" alt="Logo" class="logo" />
+        <img [src]="imagePrefix + 'logo.png'" alt="Logo" class="logo" />
       </a>
       <div *ngIf="!(isHandset$ | async)" class="navRight">
         <a href="#" class="navButton">Over Fonkelster</a>

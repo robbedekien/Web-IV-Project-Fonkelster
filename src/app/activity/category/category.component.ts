@@ -34,7 +34,7 @@ export class CategoryComponent implements OnInit {
       });
       this.activityDataService.getCategories().subscribe(cs => {
         this._categories = cs;
-        setTimeout(()=>{this.loading = false;}, 1000);
+        setTimeout(()=>{this.loading = false;}, 500);
       })
     this.isAdmin = (this.authService.user$.value === environment.adminEmail);
   }
@@ -59,11 +59,7 @@ export class CategoryComponent implements OnInit {
     console.log(this._categories.indexOf(category));
     this._categories.splice(this._categories.indexOf(category), 1);
     this.loading = true;
-    this.activityDataService.deleteCategory(category.name).subscribe(val => this.loading = false);
+    this.activityDataService.deleteCategory(category.id).subscribe(val => this.loading = false);
   }
   
-}
-
-function delay(ms: number) {
-  return new Promise( resolve => setTimeout(resolve, ms) );
 }

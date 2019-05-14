@@ -15,6 +15,8 @@ import { HttpEventType } from "@angular/common/http";
 import { Category } from "src/app/models/category.model";
 import { forEach } from "@angular/router/src/utils/collection";
 import { Activity } from "src/app/models/activity.model";
+import * as _ from "lodash";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-activity-operations",
@@ -22,10 +24,10 @@ import { Activity } from "src/app/models/activity.model";
   styleUrls: ["./activity-operations.component.scss"]
 })
 export class ActivityOperationsComponent implements OnInit {
-  activity: FormGroup;
-  category: FormGroup;
-  p: number = 1;
-  imgURL: any;
+  public activity: FormGroup;
+  public category: FormGroup;
+  public p: number = 1;
+  public imgURL: any;
   public frontImageIndex: number;
   public categories: Category[];
   public activityImages: string[] = [];
@@ -33,6 +35,7 @@ export class ActivityOperationsComponent implements OnInit {
   public concreteCategory: Category;
   public concreteActivity: Activity;
   public loading: Boolean;
+  public backend: string;
 
   constructor(
     private _fba: FormBuilder,
@@ -62,34 +65,10 @@ export class ActivityOperationsComponent implements OnInit {
     this.adapter.getFirstDayOfWeek = () => {
       return 1;
     };
+
     this.activityService
       .getCategories()
       .subscribe(res => (this.categories = res));
-    this.activity = this.fba.group({
-      name: [
-        "",
-        [Validators.required],
-        serverSideValidateCategoryName(
-          this._activityService.checkCategoryNameAvailability
-        )
-      ],
-      categories: ["", [Validators.required]],
-      description: ["", [Validators.required]],
-      start: ["", [Validators.required]],
-      end: ["", [Validators.required]],
-      image: ["", [Validators.required]]
-    });
-
-    this.category = this.fbc.group({
-      name: [
-        "",
-        [Validators.required],
-        serverSideValidateCategoryName(
-          this._activityService.checkCategoryNameAvailability
-        )
-      ],
-      image: ["", [Validators.required]]
-    });
 
     this.route.paramMap.subscribe(pa => {
       if (pa.get("sort") === "activity") {
@@ -100,18 +79,96 @@ export class ActivityOperationsComponent implements OnInit {
       if (pa.get("Id") != "-1") {
         if (this.sort === 0) {
           this.activityService.getActivity(pa.get("Id")).subscribe(val => {
+            let categoryindex = this.categories.map(val => val.name).indexOf(val.category.name);
             this.concreteActivity = val;
-            console.log(this.concreteActivity);
+            this.activity = this.fba.group({
+              name: [
+                val.name,
+                [Validators.required],
+                serverSideValidateCategoryName(
+                  this._activityService.checkCategoryNameAvailability
+                )
+              ],
+              categories: [this.categories[categoryindex], [Validators.required]],
+              description: [val.description, [Validators.required]],
+              start: [val.start, [Validators.required]],
+              end: [val.end, [Validators.required]],
+              image: ["", [Validators.required]]
+            });
+
+            this.category = this.fbc.group({
+              name: [
+                "",
+                [Validators.required],
+                serverSideValidateCategoryName(
+                  this._activityService.checkCategoryNameAvailability
+                )
+              ],
+              image: ["", [Validators.required]]
+            });
+            val.images.forEach(image => {
+              this.activityImages.push(environment.backend + image);
+            });
             this.loading = false;
-          })
+          });
         } else {
           this.activityService.getCategory(pa.get("Id")).subscribe(val => {
             this.concreteCategory = val;
-            console.log(this.concreteCategory);
+            this.activity = this.fba.group({
+              name: [
+                "",
+                [Validators.required],
+                serverSideValidateCategoryName(
+                  this._activityService.checkCategoryNameAvailability
+                )
+              ],
+              categories: ["", [Validators.required]],
+              description: ["", [Validators.required]],
+              start: ["", [Validators.required]],
+              end: ["", [Validators.required]],
+              image: ["", [Validators.required]]
+            });
+
+            this.category = this.fbc.group({
+              name: [
+                val.name,
+                [Validators.required],
+                serverSideValidateCategoryName(
+                  this._activityService.checkCategoryNameAvailability
+                )
+              ],
+              image: ["", [Validators.required]]
+            });
+            this.imgURL = environment.backend + this.concreteCategory.image;
             this.loading = false;
           });
         }
       } else {
+        this.activity = this.fba.group({
+          name: [
+            "",
+            [Validators.required],
+            serverSideValidateCategoryName(
+              this._activityService.checkCategoryNameAvailability
+            )
+          ],
+          categories: ["", [Validators.required]],
+          description: ["", [Validators.required]],
+          start: ["", [Validators.required]],
+          end: ["", [Validators.required]],
+          image: ["", [Validators.required]]
+        });
+
+        this.category = this.fbc.group({
+          name: [
+            "",
+            [Validators.required],
+            serverSideValidateCategoryName(
+              this._activityService.checkCategoryNameAvailability
+            )
+          ],
+          image: ["", [Validators.required]]
+        });
         this.loading = false;
       }
     });
@@ -134,7 +191,6 @@ export class ActivityOperationsComponent implements OnInit {
     this.activityImages = [];
     if (this.activity.value.image.files.length === 0) return;
     let files = this.activity.value.image.files;
-    console.log(files);
     if (files) {
       for (let file of files) {
         let reader = new FileReader();
@@ -144,7 +200,6 @@ export class ActivityOperationsComponent implements OnInit {
         reader.readAsDataURL(file);
       }
     }
-    console.log(this.activityImages);
   }
 
   previewCategory() {
@@ -165,42 +220,102 @@ export class ActivityOperationsComponent implements OnInit {
   }
 
   addCategory() {
-    this.activityService
-      .uploadFile(this.category.value.image.files)
-      .subscribe(event => {
-        var urls = this.fromJSON(event);
+    this.route.paramMap.subscribe(pa => {
+      if (pa.get("Id") == "-1") {
         this.activityService
-          .addCategory(this.category.value.name, urls[0])
-          .subscribe(val => {
-            console.log(val);
-            if (val) {
-              this.router.navigate(["/home"]);
-            }
+          .uploadFile(this.category.value.image.files)
+          .subscribe(event => {
+            var urls = this.fromJSON(event);
+            this.activityService
+              .addCategory(this.category.value.name, urls[0])
+              .subscribe(val => {
+                if (val) {
+                  this.router.navigate(["/home"]);
+                }
+              });
           });
-      });
+      } else {
+        if (this.category.value.image.files === undefined) {
+          this.activityService
+            .updateCategory(
+              this.concreteCategory.id,
+              this.category.value.name,
+              this.concreteCategory.image
+            )
+            .subscribe(val => this.router.navigate(["/home"]));
+        } else {
+          if (
+            this.category.value.image.files[0].name ===
+            _.last(this.concreteCategory.image.split("\\"))
+          ) {
+            this.activityService
+              .updateCategory(
+                this.concreteCategory.id,
+                this.category.value.name,
+                this.concreteCategory.image
+              )
+              .subscribe(val => this.router.navigate(["/home"]));
+          } else {
+            this.activityService
+              .uploadFile(this.category.value.image.files)
+              .subscribe(event => {
+                var urls = this.fromJSON(event);
+                this.activityService
+                  .updateCategory(
+                    this.concreteCategory.id,
+                    this.category.value.name,
+                    urls[0]
+                  )
+                  .subscribe(val => this.router.navigate(["/home"]));
+              });
+          }
+        }
+      }
+    });
   }
 
   addActivity() {
-    this.activityService
-      .uploadFile(this.activity.value.image.files)
-      .subscribe(event => {
-        var urls = this.fromJSON(event);
+    this.route.paramMap.subscribe(pa => {
+      if (pa.get("Id") == "-1") {
         this.activityService
-          .addActvity(
-            this.activity.value.name,
-            this.activity.value.description,
-            this.activity.value.start,
-            this.activity.value.end,
-            this.activity.value.categories.name,
-            urls[this.frontImageIndex],
-            urls
-          )
-          .subscribe(val => {
-            if (val) {
-              this.router.navigate(["/home"]);
-            }
+          .uploadFile(this.activity.value.image.files)
+          .subscribe(event => {
+            var urls = this.fromJSON(event);
+            this.activityService
+              .addActvity(
+                this.activity.value.name,
+                this.activity.value.description,
+                this.activity.value.start,
+                this.activity.value.end,
+                this.activity.value.categories.name,
+                urls[this.frontImageIndex],
+                urls
+              )
+              .subscribe(val => {
+                  this.router.navigate(["/home"]);
+              });
           });
-      });
+      } else {
+        this.activityService
+          .uploadFile(this.activity.value.image.files)
+          .subscribe(event => {
+            var urls = this.fromJSON(event);
+            this.activityService
+              .updateActivity(
+                this.concreteActivity.id,
+                this.activity.value.name,
+                this.activity.value.description,
+                this.activity.value.categories,
+                this.activity.value.start,
+                this.activity.value.end,
+                urls[this.frontImageIndex],
+                urls
+              ).subscribe(val => {
+                  this.router.navigate(["/home"]);
+              });
+          });
+      }
+    });
   }
 
   public fromJSON(json: any): string[] {
@@ -222,7 +337,6 @@ export class ActivityOperationsComponent implements OnInit {
     document
       .getElementById(this.frontImageIndex.toString())
       .classList.add("selected");
-    console.log(document.getElementById(this.frontImageIndex.toString()));
   }
 
   getDifference() {

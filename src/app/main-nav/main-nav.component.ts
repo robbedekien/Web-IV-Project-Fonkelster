@@ -18,7 +18,8 @@ export class MainNavComponent {
     .pipe(map(result => result.matches));
 
     private _user$: BehaviorSubject<string> = this.authService.user$;
-
+  public imagePrefix = environment.imagePrefix;
+  
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthenticationService,

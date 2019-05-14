@@ -1,5 +1,9 @@
 import { Injectable, Output, EventEmitter } from "@angular/core";
-import { HttpClient, HttpEventType, JsonpClientBackend } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpEventType,
+  JsonpClientBackend
+} from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { environment } from "../../environments/environment";
 import { Activity } from "../models/activity.model";
@@ -26,7 +30,7 @@ export class ActivityDataService {
       .pipe(map((list: any[]): Category[] => list.map(Category.fromJson)));
   }
 
-  getCategory(name:string): Observable<Category> {
+  getCategory(name: string): Observable<Category> {
     return this.http
       .get(`${environment.apiUrl}/Activity/Category/${name}`)
       .pipe(map((json: any): Category => Category.fromJson(json)));
@@ -36,6 +40,35 @@ export class ActivityDataService {
     return this.http
       .get(`${environment.apiUrl}/Activity/${id}`)
       .pipe(map((json: any): Activity => Activity.fromJSON(json)));
+  }
+
+  updateCategory(id: number, name: string, url: string) {
+    return this.http.post(`${environment.apiUrl}/Activity/Category/updateCategory`, {
+      CategoryId: id,
+      name,
+      image: {url}
+    });
+  }
+
+  updateActivity(id: number, name: string, description: string, category: Category, start: Date, end: Date, frontImage: string, images: string[]) {
+    let imagesjson: any[] = [];
+    console.log(images);
+    images.map(url => {
+      imagesjson.push({ url });
+    });
+    console.log(imagesjson);
+    let jsonBody = {
+      activityId : id,
+      name,
+      description,
+      category: { categoryId: category.id },
+      start,
+      end,
+      frontImage: { url: frontImage },
+      images: imagesjson
+    };
+    console.log(jsonBody);
+    return this.http.post(`${environment.apiUrl}/Activity/updateActivity`, jsonBody);
   }
 
   checkCategoryNameAvailability = (name: string): Observable<boolean> => {
@@ -58,31 +91,31 @@ export class ActivityDataService {
     );
   }
 
-  addActvity(name: string, description: string, start: Date, end: Date, categoryName: string, url: string, images: string[]) {
-    // let imagesjson: string = "["; 
-    // images.forEach((url) => {
-    //   imagesjson += `{ url: "${url}"},`;
-    // }); 
-    // imagesjson += "]";
+  addActvity(
+    name: string,
+    description: string,
+    start: Date,
+    end: Date,
+    categoryName: string,
+    url: string,
+    images: string[]
+  ) {
     let imagesjson: any[] = [];
-    images.map((url) => {
-      imagesjson.push({url});
+    images.map(url => {
+      imagesjson.push({ url });
     });
     let jsonBody = {
       name,
       description,
-      category: {name: categoryName},
+      category: { name: categoryName },
       start,
       end,
-      frontImage: {url},
+      frontImage: { url },
       images: imagesjson
     };
-    console.log(jsonBody);
-    return this.http.post(
-      `${environment.apiUrl}/Activity`,
-      jsonBody,
-      { responseType: "text" }
-    ); 
+    return this.http.post(`${environment.apiUrl}/Activity`, jsonBody, {
+      responseType: "text"
+    });
   }
 
   register(email: string, id: Number) {
@@ -111,28 +144,21 @@ export class ActivityDataService {
     if (files.length === 0) {
       return;
     }
-    let filesToUpload : File[] = files;
+    let filesToUpload: File[] = files;
     const formData = new FormData();
-    
-    console.log(Array.from(filesToUpload));
-    Array.from(filesToUpload).map((file, index) => {
-      return formData.append('file'+index, file, file.name);
-    });        
-    
-    return this.http.post(`${environment.apiUrl}/Image/UploadImage`, formData);
-  };
 
-  public deleteCategory(name:string)
-  {
-    return this.http.delete(
-      `${environment.apiUrl}/Activity/Category/${name}`
-    );
+    Array.from(filesToUpload).map((file, index) => {
+      return formData.append("file" + index, file, file.name);
+    });
+
+    return this.http.post(`${environment.apiUrl}/Image/UploadImage`, formData);
   }
 
-  public deleteActivity(id:number)
-  {
-    return this.http.delete(
-      `${environment.apiUrl}/Activity/${id}`
-    );
+  public deleteCategory(id: number) {
+    return this.http.delete(`${environment.apiUrl}/Activity/Category/${id}`);
+  }
+
+  public deleteActivity(id: number) {
+    return this.http.delete(`${environment.apiUrl}/Activity/${id}`);
   }
 }
