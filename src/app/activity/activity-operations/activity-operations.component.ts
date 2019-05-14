@@ -323,7 +323,7 @@ export class ActivityOperationsComponent implements OnInit {
     return res;
   }
 
-  frontImage(url: string) {
+  async frontImage(url: string) {
     this.frontImageIndex = this.activityImages.indexOf(url);
     var indexes: number[] = [];
     for (let i = 4 * (this.p - 1); i < 4 * this.p - this.getDifference(); i++) {

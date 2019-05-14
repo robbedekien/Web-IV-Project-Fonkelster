@@ -16,7 +16,7 @@
   z-index: 1;
 }
 
-.navButton{
+.navButton {
   color: white;
   padding: 0.3em 0.6em;
   margin-right: 0.5em;
@@ -25,67 +25,88 @@
   text-decoration: none;
 }
 
-.navRight{
+.navRight {
   float: right;
 
 }
-.navRight .navButton:first-of-type{
+
+.navRight .navButton:first-of-type {
   background-color: #e50d0d;
 }
-.navRight .navButton:nth-of-type(2), .navRight .navButton:nth-of-type(3){
+
+.navRight .navButton:nth-of-type(2),
+.navRight .navButton:nth-of-type(3) {
   background-color: rgb(240, 115, 6);
 }
-.navRight .navButton:nth-last-child(3){
+
+.navRight .navButton:nth-last-child(3) {
   background-color: #F9B820;
 }
-.navRight .navButton:nth-last-child(2){
+
+.navRight .navButton:nth-last-child(2) {
   background-color: #46B72A;
 }
-.navRight .navButton:nth-last-child(1){
+
+.navRight .navButton:nth-last-child(1) {
   background-color: #31C5D8;
 }
-.fas{
+
+.fas {
   color: #31C5D8;
 }
-.navToolbar{
+
+.navToolbar {
   background-color: white;
   height: auto;
   display: flex;
   justify-content: space-between;
 }
 
-mat-nav-list{
+mat-nav-list {
   display: flex;
   flex-direction: column;
+
+  div {
+    margin-top: 0.5em !important;
+    margin: 0 auto;
+    width: 80% !important;
+    a{
+      margin-right: 0;
+    }
+  }
+
+  .navButton {
+    text-align: center;
+    margin: 0.2em auto;
+    width: 60%;
+  }
 }
 
-mat-nav-list .navButton{
-  text-align: center;
-  margin: 0.2em auto;
-  width: 60%;
-}
-
-mat-nav-list .navButton:first-of-type{
+mat-nav-list .navButton:first-of-type {
   background-color: #e50d0d;
 }
-mat-nav-list .navButton:nth-of-type(2), mat-nav-list .navButton:nth-of-type(3){
+
+mat-nav-list .navButton:nth-of-type(2),
+mat-nav-list .navButton:nth-of-type(3) {
   background-color: rgb(240, 115, 6);
 }
-mat-nav-list .navButton:nth-last-child(3){
+
+mat-nav-list .navButton:nth-last-child(3) {
   background-color: #F9B820;
 }
-mat-nav-list .navButton:nth-last-child(2){
+
+mat-nav-list .navButton:nth-last-child(2) {
   background-color: #46B72A;
 }
-mat-nav-list .navButton:nth-last-child(1){
+
+mat-nav-list .navButton:nth-last-child(1) {
   background-color: #31C5D8;
 }
 
-.ng-dropdown-control{
+.ng-dropdown-control {
   background-color: #31C5D8;
   text-align: center;
   margin: 0.2em auto;
-  width: 60%;
   color: white;
   padding: 0.3em 0.6em;
   margin-right: 0.5em;
@@ -93,24 +114,44 @@ mat-nav-list .navButton:nth-last-child(1){
   bottom: 0px;
   text-decoration: none;
   cursor: pointer;
+  width: 100% !important;
 }
 
-.ng-dropdown.ng-star-inserted{
+.ng-dropdown.ng-star-inserted {
   display: inline;
 }
 
+@media(min-width: 992px) {
+  .logolink {
+    max-width: 20%;
+  }
 
-.logo{
-  width: 50%;
-  height: auto;
+  .logo {
+    height: auto;
+    max-width: 100%;
+  }
 }
-.ng-dropdown-content{
+
+@media(max-width: 992px) {
+  .logolink {
+    max-width: 30%;
+  }
+
+  .logo {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+.ng-dropdown-content {
   text-align: center;
 }
-.dropdowncontent{
+
+.dropdowncontent {
   display: flex;
   flex-direction: column;
-  a{
+
+  a {
     text-align: center;
   }
 }

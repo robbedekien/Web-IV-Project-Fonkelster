@@ -12,6 +12,13 @@
     position="end"
   >
     <mat-nav-list>
+      <a href="#" class="navButton">Over</a>
+      <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
+      <a [routerLink]="['wijzigActiviteit', '-1', 'activity']" class="navButton" *ngIf="isAdmin()"
+        >Activiteit toevoegen</a
+      >
+      <a href="#" class="navButton">Praktijk</a>
+      <a href="#" class="navButton">Contact</a>
       <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
         >Log in</a
       >
@@ -21,23 +28,16 @@
           ngDropdownContent
           dropdownClass="slide-fade"
           class="dropdowncontent"
-        >
+        > 
           <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
           <button class="navButton" (click)="logOut()">Log uit</button>
         </div>
       </div>
-      <a href="#" class="navButton">Over</a>
-      <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
-      <a [routerLink]="['wijzigActiviteit', '-1', 'activity']" class="navButton" *ngIf="isAdmin()"
-        >Activiteit toevoegen</a
-      >
-      <a href="#" class="navButton">Praktijk</a>
-      <a href="#" class="navButton">Contact</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar class="navToolbar">
-      <a [routerLink]="['home']">
+      <a [routerLink]="['home']" class="logolink">
         <img [src]="imagePrefix + 'logo.png'" alt="Logo" class="logo" />
       </a>
       <div *ngIf="!(isHandset$ | async)" class="navRight">

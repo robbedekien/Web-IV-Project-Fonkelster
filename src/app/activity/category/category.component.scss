@@ -13,33 +13,7 @@ $lightblue: #31C5D8;
   }
 }
 
-.categories {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: 0 auto;
-  .category {
-    display: inline-block;
-    width: 20%;
-    text-align: center;
-    .mat-card {
-        margin: 0.5em !important;
-        .mat-card-title{
-            height: 2em;
-            display: flex;
-            align-items: center;
-        }
-        .mat-card-header{
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
-        }
-      }
-  }
-  
-}
 
 .loading {
   display: block;
@@ -49,17 +23,86 @@ $lightblue: #31C5D8;
 
 .category-card {
   cursor: pointer;
-  border: none;
-  box-shadow: none;
-  .mat-card-image{
+  // border: none;
+  // box-shadow: none;
+
+  .mat-card-image {
     border-radius: 2px;
   }
 }
 
-button{
+button {
   cursor: pointer;
-  &:hover{
-    transition: 0.5s; 
+
+  &:hover {
+    transition: 0.5s;
     background-color: #F07306 !important;
+  }
+}
+
+@media(min-width: 992px) {
+  .categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+
+    .category {
+      display: inline-block;
+      width: 20%;
+      text-align: center;
+
+      .mat-card {
+        margin: 0.5em !important;
+
+        .mat-card-title {
+          height: 2em;
+          display: flex;
+          align-items: center;
+        }
+
+        .mat-card-header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+        }
+      }
+    }
+
+  }
+}
+
+@media(max-width: 992px) {
+  .categories {
+    // display: flex;
+    // justify-content: center;
+    // flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+
+    .category {
+      width: 80%;
+      text-align: center;
+      margin: 0 auto;
+
+      .mat-card {
+        margin: 0.5em !important;
+
+        .mat-card-title {
+          height: 2em;
+          display: flex;
+          align-items: center;
+        }
+
+        .mat-card-header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+        }
+      }
+    }
   }
 }

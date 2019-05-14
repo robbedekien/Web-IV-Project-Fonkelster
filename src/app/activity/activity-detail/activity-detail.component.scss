@@ -5,58 +5,132 @@ $yellow: #F9B820;
 $green: #46B72A;
 $lightblue: #31C5D8;
 
-h2{
-    margin: 2em;
-    text-align: center;
-    color: $blue;
+h2 {
+  margin: 2em;
+  text-align: center;
+  color: $blue;
 }
 
-.activityContainer{
+
+
+
+
+@media(min-width: 992px) {
+  .activityContainer {
     width: 60%;
     margin: 0 auto;
     display: flex;
-    .description{
-        width: 50%;
-        button{
-            margin: 0 auto;
-            display: block;
-            text-align: center;
-            padding: 0.5em 1em;
-        }
-        .loader{
-            width: 10%;
-            text-align: center;
-            margin: 0 auto;
-            display: block;
-            padding-top: 0.5em;
-        }
-        p{
-            margin: 0 1em 1em 0;
-        }
-    }
-    .images{
-        width: 50%;
-        display: flex;
-        flex-wrap: wrap;
-        &>div>div{
-            max-width: 48%;
-            margin: 0.1em;
-            display: inline-block;
-            img{
-                max-width: 100%;
-            }
-        }
-    }
-}
 
-.operationButtons{
+    .description {
+      width: 50%;
+
+      button {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        padding: 0.5em 1em;
+      }
+
+      .loader {
+        width: 10%;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+        padding-top: 0.5em;
+      }
+
+      p {
+        margin: 0 1em 1em 0;
+      }
+    }
+
+    .images {
+      width: 50%;
+      display: flex;
+      flex-wrap: wrap;
+
+      &>div>div {
+        max-width: 48%;
+        margin: 0.1em;
+        display: inline-block;
+
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  .operationButtons {
     display: flex;
     justify-content: flex-end;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 1em;
     margin-top: -4.5em;
-    &>div{
-        margin-right: 1em;
+  
+    &>div {
+      margin-right: 1em;
     }
+  }
+}
+
+@media(max-width: 992px) {
+  .activityContainer {
+    width: 80%;
+    margin: 0 auto;
+
+    .description {
+      width: 100%;
+      text-align: center;
+
+      button {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        padding: 0.5em 1em;
+      }
+
+      .loader {
+        width: 10%;
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+        padding-top: 0.5em;
+      }
+
+      p {
+        margin: 0 1em 1em 0;
+      }
+    }
+
+    .images {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 1em;
+
+      &>div>div {
+        max-width: 48%;
+        margin: 0.1em;
+        display: inline-block;
+
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  .operationButtons {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: -2em;
+    margin-bottom: 1em;    
+    padding-left: 1em;  
+    &>div {
+      margin-right: 1em;
+    }
+  }
 }

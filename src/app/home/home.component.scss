@@ -5,16 +5,37 @@ $yellow: #F9B820;
 $green: #46B72A;
 $lightblue: #31C5D8;
 
-h1{
-    text-align: center;
-    color: $blue;
-    font-size: 2.5em;
+h1 {
+  text-align: center;
+  color: $blue;
+  font-size: 2.5em;
 }
-.welcomeMessage{
-    &>div{
-        margin: 1em;
-    }
+
+.welcomeMessage {
+  .welcomeMessage {
+    display: flex;
+    flex-direction: row;
+  }
+  &>div {
+    margin: 1em;
+  }
 }
-.about{
-    text-align: center;
+
+.about {
+  text-align: center;
+}
+
+@media(max-width: 992px) {
+  .welcomeMessage {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(min-width: 992px)
+{
+  .welcomeMessage {
+    display: flex;
+    flex-direction: row;
+  }
 }

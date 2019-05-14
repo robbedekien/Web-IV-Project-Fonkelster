@@ -5,49 +5,110 @@ $yellow: #F9B820;
 $green: #46B72A;
 $lightblue: #31C5D8;
 
-.tabgroup {
-  background-color: white;
-  margin: 0 auto;
-  text-align: center;
+@media(min-width: 992px) {
+  .tabgroup {
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
 
-  .tabcontent {
-    margin: 1em;
-    box-shadow: none;
+    .tabcontent {
+      margin: 1em;
+      box-shadow: none;
 
-    form.loginForm {
-      display: flex;
-      flex-direction: column;
-      margin: 0 auto;
-      width: 20%;
+      form.loginForm {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 20%;
 
-      button {
-        width: 30%;
+        button {
+          width: 30%;
+        }
+      }
+
+      form.registerForm {
+        display: flex;
+        margin: 0 auto;
+        width: 40%;
+        padding: 1em;
+
+        button {
+          margin-top: 1em;
+          max-width: 30% !important;
+          margin-left: 0;
+          float: left;
+        }
+
+        table {
+          width: 100%;
+
+          td>* {
+            width: 90%;
+          }
+
+          td.fullLength>* {
+            width: 95%;
+          }
+
+          td.small>* {
+            width: 85%;
+          }
+        }
       }
     }
-    form.registerForm {
-      display: flex;
-      margin: 0 auto;
-      width: 40%;
-      padding: 1em;
-      button {
-        margin-top: 1em;
-        max-width: 30% !important;
-        margin-left: 0;
-        float: left;
-      }
-      table {
-        width: 100%;
+  }
+}
 
-        td>* {
-          width: 90%;
+@media(max-width: 992px) {
+  .tabgroup {
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+
+    .tabcontent {
+      margin: 1em;
+      box-shadow: none;
+
+      form.loginForm {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 60%;
+
+        button {
+          width: 30%;
         }
-        td.fullLength>*{
+      }
+
+      form.registerForm {
+        display: flex;
+        margin: 0 auto;
+        width: 40%;
+        padding: 1em;
+
+        button {
+          margin-top: 1em;
+          max-width: 30% !important;
+          margin-left: 0;
+          float: left;
+        }
+
+        table {
+          width: 100%;
+
+          td>* {
+            width: 90%;
+          }
+
+          td.fullLength>* {
             width: 95%;
+          }
+
+          td.small>* {
+            width: 85%;
+          }
+
         }
-        td.small>*{
-          width: 85%;
-        }
-        
       }
     }
   }

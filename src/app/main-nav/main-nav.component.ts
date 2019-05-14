@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
 })
 export class MainNavComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+    .observe(Breakpoints.Large)
+    .pipe(map(result => !result.matches));
 
     private _user$: BehaviorSubject<string> = this.authService.user$;
   public imagePrefix = environment.imagePrefix;
