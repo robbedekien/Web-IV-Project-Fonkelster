@@ -36,6 +36,8 @@ export class ActivityOperationsComponent implements OnInit {
   public concreteActivity: Activity;
   public loading: Boolean;
   public backend: string;
+  public activityButtonText: string = "Voeg acitiviteit toe";
+  public categoryButtonText: string = "Voeg categorie toe";
 
   constructor(
     private _fba: FormBuilder,
@@ -93,7 +95,7 @@ export class ActivityOperationsComponent implements OnInit {
               description: [val.description, [Validators.required]],
               start: [val.start, [Validators.required]],
               end: [val.end, [Validators.required]],
-              image: ["", [Validators.required]]
+              images: ["", [Validators.required]]
             });
 
             this.category = this.fbc.group({
@@ -109,6 +111,8 @@ export class ActivityOperationsComponent implements OnInit {
             val.images.forEach(image => {
               this.activityImages.push(environment.backend + image);
             });
+            this.frontImageIndex = this.concreteActivity.images.indexOf(this.concreteActivity.frontImage);
+            this.activityButtonText = "Wijzig activiteit";
             this.loading = false;
           });
         } else {
@@ -126,7 +130,7 @@ export class ActivityOperationsComponent implements OnInit {
               description: ["", [Validators.required]],
               start: ["", [Validators.required]],
               end: ["", [Validators.required]],
-              image: ["", [Validators.required]]
+              images: ["", [Validators.required]]
             });
 
             this.category = this.fbc.group({
@@ -140,6 +144,7 @@ export class ActivityOperationsComponent implements OnInit {
               image: ["", [Validators.required]]
             });
             this.imgURL = environment.backend + this.concreteCategory.image;
+            this.categoryButtonText = "Wijzig categorie";
             this.loading = false;
           });
         }
@@ -156,7 +161,7 @@ export class ActivityOperationsComponent implements OnInit {
           description: ["", [Validators.required]],
           start: ["", [Validators.required]],
           end: ["", [Validators.required]],
-          image: ["", [Validators.required]]
+          images: ["", [Validators.required]]
         });
 
         this.category = this.fbc.group({
@@ -189,8 +194,8 @@ export class ActivityOperationsComponent implements OnInit {
 
   previewActivity() {
     this.activityImages = [];
-    if (this.activity.value.image.files.length === 0) return;
-    let files = this.activity.value.image.files;
+    if (this.activity.value.images.files.length === 0) return;
+    let files = this.activity.value.images.files;
     if (files) {
       for (let file of files) {
         let reader = new FileReader();
@@ -204,6 +209,7 @@ export class ActivityOperationsComponent implements OnInit {
 
   previewCategory() {
     if (this.category.value.image.files.length === 0) return;
+    this.frontImageIndex = null;
 
     var reader = new FileReader();
     reader.readAsDataURL(this.category.value.image.files[0]);
@@ -230,7 +236,7 @@ export class ActivityOperationsComponent implements OnInit {
               .addCategory(this.category.value.name, urls[0])
               .subscribe(val => {
                 if (val) {
-                  this.router.navigate(["/home"]);
+                  this.router.navigate(["/categorieën"]);
                 }
               });
           });
@@ -242,7 +248,7 @@ export class ActivityOperationsComponent implements OnInit {
               this.category.value.name,
               this.concreteCategory.image
             )
-            .subscribe(val => this.router.navigate(["/home"]));
+            .subscribe(val => this.router.navigate(["/categorieën"]));
         } else {
           if (
             this.category.value.image.files[0].name ===
@@ -254,7 +260,7 @@ export class ActivityOperationsComponent implements OnInit {
                 this.category.value.name,
                 this.concreteCategory.image
               )
-              .subscribe(val => this.router.navigate(["/home"]));
+              .subscribe(val => this.router.navigate(["/categorieën"]));
           } else {
             this.activityService
               .uploadFile(this.category.value.image.files)
@@ -266,7 +272,7 @@ export class ActivityOperationsComponent implements OnInit {
                     this.category.value.name,
                     urls[0]
                   )
-                  .subscribe(val => this.router.navigate(["/home"]));
+                  .subscribe(val => this.router.navigate(["/categorieën"]));
               });
           }
         }
@@ -278,11 +284,11 @@ export class ActivityOperationsComponent implements OnInit {
     this.route.paramMap.subscribe(pa => {
       if (pa.get("Id") == "-1") {
         this.activityService
-          .uploadFile(this.activity.value.image.files)
+          .uploadFile(this.activity.value.images.files)
           .subscribe(event => {
             var urls = this.fromJSON(event);
             this.activityService
-              .addActvity(
+              .addActivity(
                 this.activity.value.name,
                 this.activity.value.description,
                 this.activity.value.start,
@@ -292,14 +298,34 @@ export class ActivityOperationsComponent implements OnInit {
                 urls
               )
               .subscribe(val => {
-                  this.router.navigate(["/home"]);
+                this.activityService.activities$.subscribe(as => {
+                  localStorage.setItem("Activities", JSON.stringify(as));
+                  this.router.navigate(["/categorie", this.activity.value.categories.name]);
+                });
+                  
               });
           });
       } else {
-        this.activityService
-          .uploadFile(this.activity.value.image.files)
+        if(this.activity.value.images.files === undefined)
+        {
+          this.activityService.updateActivity(
+            this.concreteActivity.id,
+            this.activity.value.name,
+            this.activity.value.description,
+            this.activity.value.categories,
+            this.activity.value.start,
+            this.activity.value.end,
+            this.concreteActivity.images[this.frontImageIndex],
+            this.concreteActivity.images
+          ).subscribe(val => {
+            this.router.navigate(['/activiteit', this.concreteActivity.id.toString()]);
+          });
+        } else {
+          this.activityService
+          .uploadFile(this.activity.value.images.files)
           .subscribe(event => {
             var urls = this.fromJSON(event);
+            console.log(urls);
             this.activityService
               .updateActivity(
                 this.concreteActivity.id,
@@ -310,10 +336,12 @@ export class ActivityOperationsComponent implements OnInit {
                 this.activity.value.end,
                 urls[this.frontImageIndex],
                 urls
-              ).subscribe(val => {
-                  this.router.navigate(["/home"]);
+              )
+              .subscribe(val => {
+                  this.router.navigate(["/activiteit", this.concreteActivity.id.toString()]);
               });
           });
+        }
       }
     });
   }
@@ -344,6 +372,15 @@ export class ActivityOperationsComponent implements OnInit {
     if (res === 4) return 0;
     return res;
   }
+
+  isFrontImage(url:string){
+    if(this.concreteActivity === undefined)
+    {
+      return false
+    }
+    return this.activityImages[this.frontImageIndex] == url;  
+  }
+
 }
 
 function serverSideValidateCategoryName(

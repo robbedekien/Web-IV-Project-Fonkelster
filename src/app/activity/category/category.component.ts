@@ -34,7 +34,7 @@ export class CategoryComponent implements OnInit {
       });
       this.activityDataService.getCategories().subscribe(cs => {
         this._categories = cs;
-        setTimeout(()=>{this.loading = false;}, 500);
+        setTimeout(()=>{this.loading = false;}, 300);
       })
     this.isAdmin = (this.authService.user$.value === environment.adminEmail);
   }

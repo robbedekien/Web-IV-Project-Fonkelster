@@ -1,4 +1,10 @@
-<mat-tab-group dynamicHeight class="tabgroup" mat-align-tabs="center" [selectedIndex]="sort" *ngIf="!loading">
+<mat-tab-group
+  dynamicHeight
+  class="tabgroup"
+  mat-align-tabs="center"
+  [selectedIndex]="sort"
+  *ngIf="!loading"
+>
   <mat-tab label="Activiteit toevoegen" style="margin-top: 1em;">
     <div class="mat-elevation-z4 tabcontent">
       <div class="activitycontainer">
@@ -32,7 +38,12 @@
                 <td colspan="1">
                   <mat-form-field>
                     <mat-label>Categorie</mat-label>
-                    <mat-select matInput formControlName="categories" required [(value)]="selected">
+                    <mat-select
+                      matInput
+                      formControlName="categories"
+                      required
+                      [(value)]="selected"
+                    >
                       <mat-option
                         *ngFor="let category of categories"
                         [value]="category"
@@ -128,7 +139,7 @@
                   <mat-form-field>
                     <ngx-mat-file-input
                       #removableInputActivity
-                      formControlName="image"
+                      formControlName="images"
                       placeholder="Activiteit afbeeldingen"
                       #file
                       accept="image/*"
@@ -150,11 +161,11 @@
                     <mat-icon matSuffix>folder</mat-icon>
                     <mat-error
                       *ngIf="
-                        activity.get('image')['errors'] &&
-                        activity.get('image').touched
+                        activity.get('images')['errors'] &&
+                        activity.get('images').touched
                       "
                     >
-                      {{ getErrorMessage(activity.get("image")["errors"]) }}
+                      {{ getErrorMessage(activity.get("images")["errors"]) }}
                     </mat-error>
                   </mat-form-field>
                 </td>
@@ -170,22 +181,31 @@
                 let image of activityImages
                   | paginate: { itemsPerPage: 4, currentPage: p }
               "
-              (click) = "frontImage(image)"
-              [attr.id] = "activityImages.indexOf(image)"
+              (click)="frontImage(image)"
             >
-              <img [src]="image" height="200" />
+              <img
+                [src]="image"
+                height="200"
+                [attr.id]="activityImages.indexOf(image)"
+                [ngClass]="{ selected: isFrontImage(image) }"
+              />
             </div>
             <pagination-controls
               (pageChange)="p = $event"
               *ngIf="activityImages.length !== 0"
               class="controls"
-              nextLabel = "Volgende"
-              previousLabel = "Vorige"
+              nextLabel="Volgende"
+              previousLabel="Vorige"
             ></pagination-controls>
           </div>
         </div>
-        <button id="activitySubmit" type="submit" mat-button form="activityForm">
-          Voeg activiteit toe
+        <button
+          id="activitySubmit"
+          type="submit"
+          mat-button
+          form="activityForm"
+        >
+          {{ activityButtonText }}
         </button>
       </div>
     </div>
@@ -199,7 +219,7 @@
           class="categoryForm"
           [formGroup]="category"
         >
-          <table> 
+          <table>
             <tr>
               <mat-form-field>
                 <input
@@ -256,7 +276,7 @@
             <tr>
               <td>
                 <button id="categorySubmit" type="submit" mat-button>
-                  Voeg categorie toe
+                  {{ categoryButtonText }}
                 </button>
               </td>
             </tr>

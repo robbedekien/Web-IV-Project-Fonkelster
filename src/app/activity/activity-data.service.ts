@@ -52,11 +52,9 @@ export class ActivityDataService {
 
   updateActivity(id: number, name: string, description: string, category: Category, start: Date, end: Date, frontImage: string, images: string[]) {
     let imagesjson: any[] = [];
-    console.log(images);
     images.map(url => {
       imagesjson.push({ url });
     });
-    console.log(imagesjson);
     let jsonBody = {
       activityId : id,
       name,
@@ -67,7 +65,6 @@ export class ActivityDataService {
       frontImage: { url: frontImage },
       images: imagesjson
     };
-    console.log(jsonBody);
     return this.http.post(`${environment.apiUrl}/Activity/updateActivity`, jsonBody);
   }
 
@@ -91,7 +88,7 @@ export class ActivityDataService {
     );
   }
 
-  addActvity(
+  addActivity(
     name: string,
     description: string,
     start: Date,

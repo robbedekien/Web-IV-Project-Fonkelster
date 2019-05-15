@@ -50,9 +50,6 @@ export class ActivityDetailComponent implements OnInit {
     }
 
     this.isAdmin = (this.authService.user$.value === environment.adminEmail);
-    console.log(this.authService.user$.value);
-    console.log(environment.adminEmail);
-    console.log(this.isAdmin);
   }
 
   register() {
