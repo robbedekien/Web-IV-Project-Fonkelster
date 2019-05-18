@@ -5,7 +5,7 @@ import { ActivityComponent } from './activity/activity/activity.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatDatepicker, MatDatepickerModule, DateAdapter, MatNativeDateModule, MatSelectModule, MatExpansionModule, MatSpinner, MatProgressSpinnerModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatDatepicker, MatDatepickerModule, DateAdapter, MatNativeDateModule, MatSelectModule, MatExpansionModule, MatSpinner, MatProgressSpinnerModule, MAT_DATE_LOCALE } from '@angular/material';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,7 +18,7 @@ import { UserComponent } from './user/user/user.component';
 import { AngularDropdownModule } from 'angular-dropdown';
 import { CategoryComponent } from './activity/category/category.component';
 import { ActivityDetailComponent } from './activity/activity-detail/activity-detail.component';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ActivityOperationsComponent } from './activity/activity-operations/activity-operations.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
@@ -26,6 +26,10 @@ import { MemberActivitiesComponent } from './user/member-activities/member-activ
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import {LOCALE_ID} from '@angular/core';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { AboutComponent } from './about/about.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { ContactComponent } from './contact/contact.component';
 
 registerLocaleData(localeNl, 'nl');
 
@@ -42,7 +46,10 @@ registerLocaleData(localeNl, 'nl');
     CategoryComponent,
     ActivityDetailComponent,
     ActivityOperationsComponent,
-    MemberActivitiesComponent
+    MemberActivitiesComponent,
+    AboutComponent,
+    WorkspaceComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +77,14 @@ registerLocaleData(localeNl, 'nl');
     MatProgressSpinnerModule,
     NgbModalModule,
     NgxPaginationModule,
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    NgbModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger', // set defaults here
+      cancelButtonType: 'warning'
+    })
     ],
-  providers: [httpInterceptorProviders, { provide: LOCALE_ID, useValue: 'nl' }],
+  providers: [httpInterceptorProviders, { provide: LOCALE_ID, useValue: 'nl' }, { provide: MAT_DATE_LOCALE, useValue: 'nl-NL'}],
   bootstrap: [AppComponent],
   exports: [ActivityDetailComponent]
 })

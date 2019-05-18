@@ -12,15 +12,15 @@
         </mat-form-field>
         <mat-form-field>
           <input
-                  matInput
-                  placeholder="Wachtwoord"
-                  formControlName="password"
-                  [type]="hidel ? 'text' : 'password'"
-                  required
-                />
-                <mat-icon matSuffix (click)="hidel = !hidel">{{
-                  hidel ? "visibility_off" : "visibility"
-                }}</mat-icon>
+            matInput
+            placeholder="Wachtwoord"
+            formControlName="password"
+            [type]="hidel ? 'text' : 'password'"
+            required
+          />
+          <mat-icon matSuffix (click)="hidel = !hidel">{{
+            hidel ? "visibility_off" : "visibility"
+          }}</mat-icon>
           <mat-error
             *ngIf="
               login.get('password')['errors'] && login.get('password').touched
@@ -29,6 +29,9 @@
             {{ getErrorMessage(login.get("password")["errors"]) }}
           </mat-error>
         </mat-form-field>
+        <mat-error *ngIf="errorMessage != ''" class="loginError">
+          {{ errorMessage }}
+        </mat-error>
         <button type="submit" mat-button>
           Inloggen
         </button>
@@ -137,9 +140,9 @@
               <mat-form-field>
                 <mat-label>Geslacht</mat-label>
                 <mat-select matInput formControlName="gender" required>
-                    <mat-option *ngFor="let gender of genders" [value]="gender">
-                        {{gender}} 
-                      </mat-option>
+                  <mat-option *ngFor="let gender of genders" [value]="gender">
+                    {{ gender }}
+                  </mat-option>
                 </mat-select>
                 <mat-error
                   *ngIf="
@@ -197,6 +200,7 @@
                   formControlName="dateOfBirth"
                   [matDatepicker]="picker"
                   required
+                  [max] = "maxDate"
                 />
                 <mat-datepicker-toggle
                   matSuffix

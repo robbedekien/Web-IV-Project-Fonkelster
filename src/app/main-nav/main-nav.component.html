@@ -12,25 +12,37 @@
     position="end"
   >
     <mat-nav-list>
-      <a href="#" class="navButton">Over</a>
+      <a [routerLink]="['over']" class="navButton">Over</a>
       <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
-      <a [routerLink]="['wijzigActiviteit', '-1', 'activity']" class="navButton" *ngIf="isAdmin()"
+      <a
+        [routerLink]="['wijzigActiviteit', '-1', 'activity']"
+        class="navButton"
+        *ngIf="isAdmin()"
         >Activiteit toevoegen</a
       >
-      <a href="#" class="navButton">Praktijk</a>
-      <a href="#" class="navButton">Contact</a>
+      <a [routerLink]="['praktijk']" class="navButton">Praktijk</a>
+      <a [routerLink]="['contact']" class="navButton">Contact</a>
       <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
         >Log in</a
       >
-      <div ngDropdown *ngIf="user !== null">
-        <a ngDropdownControl>Account</a>
-        <div
-          ngDropdownContent
-          dropdownClass="slide-fade"
-          class="dropdowncontent"
-        > 
-          <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
-          <button class="navButton" (click)="logOut()">Log uit</button>
+      <div ngbDropdown class="d-inline-block" *ngIf="user !== null" placement="bottom-left">
+        <button class="navButton" id="dropdownBasic1" ngbDropdownToggle>
+          Account
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+          <a
+            ngbDropdownItem
+            [routerLink]="['overzichtInschrijvingen']"
+            class="navButton"
+          >
+            Inschrijvingen
+          </a>
+          <a ngbDropdownItem [routerLink]="['account']" class="navButton">
+            Wijzig gegevens
+          </a>
+          <a ngbDropdownItem class="navButton" (click)="logOut()" style="cursor: pointer">
+            Log uit
+          </a>
         </div>
       </div>
     </mat-nav-list>
@@ -41,7 +53,7 @@
         <img [src]="imagePrefix + 'logo.png'" alt="Logo" class="logo" />
       </a>
       <div *ngIf="!(isHandset$ | async)" class="navRight">
-        <a href="#" class="navButton">Over Fonkelster</a>
+        <a [routerLink]="['over']" class="navButton">Over Fonkelster</a>
         <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
         <a
           [routerLink]="['wijzigActiviteit', '-1', 'activity']"
@@ -49,23 +61,30 @@
           *ngIf="isAdmin()"
           >Activiteit toevoegen</a
         >
-        <a href="#" class="navButton">Praktijk</a>
-        <a href="#" class="navButton">Contact</a>
+        <a [routerLink]="['praktijk']" class="navButton">Praktijk</a>
+        <a [routerLink]="['contact']" class="navButton">Contact</a>
         <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
           >Log in</a
         >
-        <div ngDropdown *ngIf="user !== null">
-          <a ngDropdownControl>Account</a>
-          <div
-            ngDropdownContent
-            dropdownClass="slide-fade"
-            class="dropdowncontent"
-          >
-            <a [routerLink]="['overzichtInschrijvingen']" class="navButton"
-              >Overzicht inschrijvingen</a
+
+        <div ngbDropdown class="d-inline-block" *ngIf="user !== null">
+          <button class="navButton" id="dropdownBasic1" ngbDropdownToggle>
+            Account
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" placement = "bottom-right">
+            <a
+              ngbDropdownItem
+              [routerLink]="['overzichtInschrijvingen']"
+              class="navButton"
             >
-            <a [routerLink]="['account']" class="navButton">Wijzig gegevens</a>
-            <a class="navButton" (click)="logOut()">Log uit</a>
+              Overzicht inschrijvingen
+            </a>
+            <a ngbDropdownItem [routerLink]="['account']" class="navButton">
+              Wijzig gegevens
+            </a>
+            <a ngbDropdownItem class="navButton" (click)="logOut()" style="cursor: pointer">
+              Log uit
+            </a>
           </div>
         </div>
       </div>

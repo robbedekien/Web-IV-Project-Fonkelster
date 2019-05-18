@@ -1,5 +1,4 @@
 <h2>Wijzig gegevens</h2>
-<h2>AUTHORIZATION OP DEZE PAGINA TOEVOEGEN</h2>
 <div class="changeForm">
   <form (ngSubmit)="Update()" class="registerForm" [formGroup]="register">
     <table>
@@ -162,3 +161,6 @@
     </ng-template>
   </mat-card>
 </ng-template>
+<div *ngIf="alertMessage !== ''" class="alertMessage">
+  <p class="alertMessageText">{{ alertMessage }}</p>
+</div> 

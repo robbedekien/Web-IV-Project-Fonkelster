@@ -20,6 +20,10 @@ export class CategoryComponent implements OnInit {
   private _categories: Category[];
   public isAdmin:Boolean;
   public backend:string = environment.backend;
+  public alertMessage:string ="";
+
+  public popoverTitle: string = 'Categorie verwijderen';
+  public popoverMessage: string = 'Weet je zeker dat je de categorie wilt verwijderen?';
   
   constructor(
     private authService: AuthenticationService,
@@ -28,6 +32,12 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if(localStorage.getItem("alert") !== null)
+    {
+      this.alertMessage = localStorage.getItem("alert");
+      localStorage.removeItem("alert");
+      setTimeout(() => {this.alertMessage = ""}, 3000);
+    }
     this.loading = true;
       this._fetchActivities$.subscribe(as => {
         localStorage.setItem("Activities", JSON.stringify(as));
@@ -56,7 +66,6 @@ export class CategoryComponent implements OnInit {
   }
 
   delete(category:Category){
-    console.log(this._categories.indexOf(category));
     this._categories.splice(this._categories.indexOf(category), 1);
     this.loading = true;
     this.activityDataService.deleteCategory(category.id).subscribe(val => this.loading = false);

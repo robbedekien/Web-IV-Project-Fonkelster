@@ -26,6 +26,8 @@ export class UserComponent implements OnInit {
   private genders: string[] = ["Man", "Vrouw"];
   private user: User;
 
+  public alertMessage:string = "";
+
   selected;
 
   constructor(
@@ -34,7 +36,6 @@ export class UserComponent implements OnInit {
     private adapter: DateAdapter<any>,
     private authService: AuthenticationService
   ) {}
-
 
   validatePassword(control: FormGroup): { [key: string]: any } {
     if (!(control.get("password").value === control.get("confirmPass").value)) {
@@ -51,28 +52,30 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(localStorage.getItem("user") !== null)
-    {
+    if (localStorage.getItem("user") !== null) {
       this.user = JSON.parse(localStorage.getItem("user"));
     }
+    var d = new Date(this.user.DoB);  
+    d.setDate( d.getDate() + 1);
     this.selected = this.user.gender.toString();
     this.adapter.setLocale("nl");
-    this.register = this.fbr.group(
-      {
-        name: [this.user.name, [Validators.required]],
-        firstName: [this.user.firstName, [Validators.required]],
-        email: [this.user.email, [Validators.required, Validators.email]],
-        nr: [this.user.location.number, [Validators.required, this.validateNumber]],
-        street: [this.user.location.street, [Validators.required]],
-        city: [this.user.location.city, [Validators.required]],
-        postal: [
-          this.user.location.postalCode,
-          [Validators.required, this.validateNumber]
-        ],
-        dateOfBirth: [this.user.DoB, [Validators.required]],
-        gender: [this.user.gender, [Validators.required]]
-      }
-    );
+    this.register = this.fbr.group({
+      name: [this.user.name, [Validators.required]],
+      firstName: [this.user.firstName, [Validators.required]],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      nr: [
+        this.user.location.number,
+        [Validators.required, this.validateNumber]
+      ],
+      street: [this.user.location.street, [Validators.required]],
+      city: [this.user.location.city, [Validators.required]],
+      postal: [
+        this.user.location.postalCode,
+        [Validators.required, this.validateNumber]
+      ],
+      dateOfBirth: [d, [Validators.required]],
+      gender: [this.user.gender, [Validators.required]]
+    });
     this.register.controls.email.disable();
   }
 
@@ -95,7 +98,8 @@ export class UserComponent implements OnInit {
     }
   }
 
-  Update() {  
+  Update() {
+    var d = new Date(this.register.value.dateOfBirth);
     this.userDataService.updateUser(
       this.register.value.name,
       this.register.value.firstName,
@@ -105,8 +109,8 @@ export class UserComponent implements OnInit {
       this.register.value.gender,
       this.register.value.postal,
       this.register.value.city,
-      this.register.value.dateOfBirth
+      d
     );
-    
+    this.alertMessage="Gegevens succesvol gewijzigd";
   }
 }

@@ -1,21 +1,21 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
-import { map } from "rxjs/operators";
-import { BehaviorSubject, Observable } from "rxjs";
-import { User } from "./user.module";
-import { UserDataService } from "./user-data.service";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from './user.module';
+import { UserDataService } from './user-data.service';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly _token = "currentUser";
+  private readonly _token = 'currentUser';
   private _user$: BehaviorSubject<string>;
   private _redirectUrl: string;
 
-  constructor(private http: HttpClient, private dataService: UserDataService, private router: Router, private userDataService:UserDataService) {
+  constructor(private http: HttpClient, private dataService: UserDataService, private router: Router, private userDataService: UserDataService) {
     let parsedToken = parseJwt(localStorage.getItem(this._token));
     if (parsedToken) {
       const expires =
@@ -43,6 +43,7 @@ export class AuthenticationService {
     password: string,
     passwordConfirmation: string
   ): Observable<boolean> {
+    console.log(dateOfBirth);
     return this.http
       .post(
         `${environment.apiUrl}/Account/register`,
@@ -115,7 +116,8 @@ export class AuthenticationService {
   }
 
   get token() {
-    return this._token;
+    const localToken = localStorage.getItem(this._token);
+    return !!localToken ? localToken : '';
   }
 
   get redirectUrl() {

@@ -14,6 +14,7 @@ import { AuthenticationService } from "../user/authentication.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
@@ -44,7 +45,10 @@ export class RegisterComponent implements OnInit {
   public hidel: boolean;
   public hide1: boolean;
   public hide: boolean;
-  
+
+  public errorMessage: string;
+
+  public maxDate:Date = new Date();
 
   constructor(
     private _fbl: FormBuilder,
@@ -74,19 +78,20 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
+
   validateNumber(control: FormControl): { [key: string]: any } {
     if (isNaN(control.value)) {
-      return { notNumber: true }; 
+      return { notNumber: true };
     }
     return null;
   }
 
   ngOnInit() {
-    if(localStorage.getItem("detour") !== null)
-    {
+    if (localStorage.getItem("detour") !== null) {
       this.detour = localStorage.getItem("detour");
     }
     this.adapter.setLocale("nl");
+    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     this.register = this.fbr.group(
       {
         name: ["", [Validators.required]],
@@ -101,7 +106,7 @@ export class RegisterComponent implements OnInit {
         city: ["", [Validators.required]],
         postal: ["", [Validators.required, this.validateNumber]],
         dateOfBirth: ["", [Validators.required]],
-        password: ["", [Validators.required]],
+        password: ["", [Validators.required, Validators.minLength(8), Validators.pattern(regex)]],
         confirmPass: ["", [Validators.required]],
         gender: ["", [Validators.required]]
       },
@@ -125,53 +130,64 @@ export class RegisterComponent implements OnInit {
       return "Dit veld is verplicht";
     } else if (errors.minlength) {
       return `Dit veld moet minstens ${errors.minlength.requiredLength} 
-        karakters bevatten (nu ${errors.minlength.actualLength})`;
+        karakters bevatten`;
     } else if (errors.email) {
       return "Dit veld bevat geen geldig e-mailadres";
     } else if (errors.userAlreadyExists) {
       return "Email is al geregistreerd";
+    } else if (errors.pattern) {
+      return "Wachtwoord moet een hoofletter, kleine letter en een cijfer bevatten";
     }
   }
 
   logIn() {
     this.authService
       .login(this.login.value.email, this.login.value.password)
-      .subscribe(val => {
-        if (val) {
-          if (this.authService.redirectUrl) {
-            this.router.navigateByUrl(this.authService.redirectUrl);
-            this.authService.redirectUrl = undefined;
-          } else {
-            this.router.navigate(["/home"]);
+      .subscribe(
+        val => {
+          if (val) {
+            if (this.authService.redirectUrl) {
+              this.router.navigateByUrl(this.authService.redirectUrl);
+              this.authService.redirectUrl = undefined;
+            } else {
+              this.router.navigate(["/home"]);
+            }
           }
+        },
+        (err: HttpErrorResponse) => {
+          this.errorMessage = "Verkeerd wachtwoord en/of email";
         }
-      });
+      );
   }
 
   Register() {
-    this.authService
-      .register(
-        this.register.value.name,
-        this.register.value.firstName,
-        this.register.value.email,
-        this.register.value.street,
-        this.register.value.nr,
-        this.register.value.gender,
-        this.register.value.postal,
-        this.register.value.city,
-        this.register.value.dateOfBirth,
-        this.register.value.password,
-        this.register.value.confirmPass
-      )
-      .subscribe(val => {
-        if (val) {
-          if (this.authService.redirectUrl) {
-            this.router.navigateByUrl(this.authService.redirectUrl);
-            this.authService.redirectUrl = undefined;
-          } else {
-            this.router.navigate(["/home"]);
+    if (this.register.invalid) {
+      return null;
+    } else {
+      this.authService
+        .register(
+          this.register.value.name,
+          this.register.value.firstName,
+          this.register.value.email,
+          this.register.value.street,
+          this.register.value.nr,
+          this.register.value.gender,
+          this.register.value.postal,
+          this.register.value.city,
+          this.register.value.dateOfBirth,
+          this.register.value.password,
+          this.register.value.confirmPass
+        )
+        .subscribe(val => {
+          if (val) {
+            if (this.authService.redirectUrl) {
+              this.router.navigateByUrl(this.authService.redirectUrl);
+              this.authService.redirectUrl = undefined;
+            } else {
+              this.router.navigate(["/home"]);
+            }
           }
-        }
-      });
+        });
+    }
   }
 }

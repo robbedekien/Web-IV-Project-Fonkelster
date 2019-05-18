@@ -5,7 +5,8 @@ import { map } from "rxjs/operators";
 import { User } from "../user/user.module";
 import { AuthenticationService } from "../user/authentication.service";
 import { UserDataService } from "../user/user-data.service";
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
+import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-main-nav",
@@ -17,25 +18,26 @@ export class MainNavComponent {
     .observe(Breakpoints.Large)
     .pipe(map(result => !result.matches));
 
-    private _user$: BehaviorSubject<string> = this.authService.user$;
+  private _user$: BehaviorSubject<string> = this.authService.user$;
   public imagePrefix = environment.imagePrefix;
-  
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthenticationService,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    config: NgbDropdownConfig
   ) {
   }
 
-  get user():String {
+  get user(): String {
     return this._user$.getValue();
   }
-  
-  isAdmin():boolean {
+
+  isAdmin(): boolean {
     return this._user$.getValue() === environment.adminEmail;
   }
 
-  logOut(){
+  logOut() {
     this.authService.logout();
   }
 }

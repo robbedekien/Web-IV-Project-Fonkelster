@@ -1,0 +1,84 @@
+$blue: #008bd0;
+$red: #e50d0d;
+$orange: #f07306;
+$yellow: #f9b820;
+$green: #46b72a;
+$lightblue: #31c5d8;
+
+@media(min-width: 992px)
+{
+    .contactContainer {
+        width: 80%;
+        margin: 0 auto;
+        h2 {
+          color: $blue;
+          text-align: center;
+          margin-bottom: 1em;
+        }
+        .innerContainer {
+          display: flex;
+          flex-wrap: wrap;
+          .contact {
+            text-align: right;
+            margin-right: 2em;
+            margin-top: 3em;
+            width: 38%;
+            p {
+              &:first-of-type {
+                color: $yellow;
+              }
+            }
+          }
+          .map {
+            max-width: 58%;
+            iframe{
+                max-width: 100%;
+            }
+          }
+      
+          margin-bottom: 1em;
+        }
+        & > div {
+          width: 80%;
+          margin: 0 auto;
+        }
+      }
+}
+
+@media(max-width: 992px)
+{
+    .contactContainer {
+        width: 80%;
+        margin: 0 auto;
+        h2 {
+          color: $blue;
+          text-align: center;
+          margin-bottom: 1em;
+        }
+        .innerContainer {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          .contact {
+            text-align: center;
+            margin-top: 1em;
+            p {
+              &:first-of-type {
+                color: $yellow;
+              }
+            }
+          }
+          .map {
+            iframe{
+                max-width: 100%;
+            }
+          }
+      
+          margin-bottom: 1em;
+        }
+        & > div {
+          width: 80%;
+          margin: 0 auto;
+        }
+      }
+}

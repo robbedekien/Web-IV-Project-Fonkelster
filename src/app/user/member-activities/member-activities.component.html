@@ -3,17 +3,20 @@
     <p>Beheer hier je inschrijvingen</p>
 </div>
 <div *ngIf="(activities); else loading" class="container"> 
-    <mat-list>
-        <mat-list-item *ngFor="let activity of activities">
-            <i class="far fa-star" mat-list-icon></i>
-            <div mat-line class="row">
-                  <h4>{{activity.name}}</h4>
-                  <p> {{activity.start | date}} </p>
-                  <p> {{activity.end | date}} </p>
-                 <button (click) = "unsubscribe(activity.id)">Uitschrijven</button>
-            </div>
-        </mat-list-item>
-      </mat-list>
+      <ngb-accordion [closeOthers]="true">
+        <div *ngFor="let activity of activities" class="activities">
+            <ngb-panel [id]="activity.id" [title]="activity.name">
+                <ng-template ngbPanelContent>
+                    <div mat-line class="row">
+                        <p> {{activity.start | date}} </p>
+                        <p> {{activity.end | date}} </p>
+                       <button (click) = "unsubscribe(activity.id)">Uitschrijven</button>
+                       <button [routerLink]="['../activiteit/', activity.id]">Details</button>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+        </div>
+      </ngb-accordion>
       <div *ngIf="activities.length === 0" class="empty">
           <p>Je hebt je nog niet ingeschreven voor een activiteit</p>
       </div>
@@ -21,7 +24,4 @@
 <div class="verticalSpacer"></div>
 <ng-template #loading>
   <img src="../../../assets/images/loading.gif" alt="loading" class="loading">
-</ng-template>
-<ng-template #empty>
-  <p>Je hebt je nog niet ingeschreven voor een activiteit.</p>
 </ng-template>

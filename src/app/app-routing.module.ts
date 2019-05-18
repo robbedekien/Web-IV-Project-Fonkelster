@@ -10,17 +10,24 @@ import { CategoryComponent } from './activity/category/category.component';
 import { ActivityDetailComponent } from './activity/activity-detail/activity-detail.component';
 import { ActivityOperationsComponent } from './activity/activity-operations/activity-operations.component';
 import { MemberActivitiesComponent } from './user/member-activities/member-activities.component';
+import { AuthGuard } from './user/auth.guard';
+import { AboutComponent } from './about/about.component';
+import { WorkspaceComponent } from './workspace/workspace.component';
+import { ContactComponent } from './contact/contact.component';
 
 const appRoutes: Routes = [
   { path: 'categorieën', component: CategoryComponent },
   { path: 'categorie/:category', component: ActivityComponent},
   { path: 'activiteit/:activityId', component: ActivityDetailComponent},
-  { path: 'wijzigActiviteit/:Id/:sort', component: ActivityOperationsComponent},
-  { path: 'overzichtInschrijvingen', component: MemberActivitiesComponent},
+  { path: 'wijzigActiviteit/:Id/:sort', canActivate: [ AuthGuard ], component: ActivityOperationsComponent},
+  { path: 'over', component: AboutComponent},
+  { path: 'praktijk', component: WorkspaceComponent},
+  { path: 'contact', component: ContactComponent},
+  { path: 'overzichtInschrijvingen', canActivate: [ AuthGuard ], component: MemberActivitiesComponent},
   { path: 'home', component: HomeComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'register', component: RegisterComponent},
-  { path: 'account', component: UserComponent},
+  { path: 'account', canActivate: [ AuthGuard ], component: UserComponent},
   { path: '**', component: PageNotFoundComponent}
 ];
 

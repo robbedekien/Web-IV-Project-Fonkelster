@@ -5,7 +5,7 @@
   [selectedIndex]="sort"
   *ngIf="!loading"
 >
-  <mat-tab label="Activiteit toevoegen" style="margin-top: 1em;">
+  <mat-tab label="Activiteit toevoegen" style="margin-top: 1em;" [disabled]="activityDisabled">
     <div class="mat-elevation-z4 tabcontent">
       <div class="activitycontainer">
         <div class="formcontainer">
@@ -93,6 +93,7 @@
                       formControlName="start"
                       [matDatepicker]="pickerStart"
                       required
+                      [min]="minDate"
                     />
                     <mat-datepicker-toggle
                       matSuffix
@@ -117,6 +118,7 @@
                       formControlName="end"
                       [matDatepicker]="pickerEnd"
                       required
+                      [min]="minDate"
                     />
                     <mat-datepicker-toggle
                       matSuffix
@@ -143,7 +145,6 @@
                       placeholder="Activiteit afbeeldingen"
                       #file
                       accept="image/*"
-                      required
                       (change)="previewActivity()"
                       multiple
                     ></ngx-mat-file-input>
@@ -172,6 +173,9 @@
               </tr>
             </table>
           </form>
+          <mat-error *ngIf="isImageError" class="imageError">
+            {{ imageError }}
+          </mat-error>
         </div>
 
         <div class="imagecontainer">
@@ -199,19 +203,28 @@
             ></pagination-controls>
           </div>
         </div>
-        <button
-          id="activitySubmit"
-          type="submit"
-          mat-button
-          form="activityForm"
-        >
-          {{ activityButtonText }}
-        </button>
+        <div class="activityButtonContainer">
+          <button
+            id="activitySubmit"
+            type="submit"
+            mat-button
+            form="activityForm"
+            *ngIf="!isSubmitted"
+          >
+            {{ activityButtonText }}
+          </button>
+          <img
+            src="../../assets/images/loading.gif"
+            alt="laden"
+            *ngIf="isSubmitted;"
+            class="loader"
+          />
+        </div>
       </div>
     </div>
   </mat-tab>
 
-  <mat-tab label="Categorie toevoegen" style="margin-top: 1em;">
+  <mat-tab label="Categorie toevoegen" style="margin-top: 1em;" [disabled]="categoryDisabled">
     <div class="mat-elevation-z4 tabcontent">
       <div class="categorycontainer">
         <form
@@ -246,7 +259,6 @@
                   placeholder="Categorie afbeelding"
                   #file
                   accept="image/*"
-                  required
                   (change)="previewCategory()"
                 ></ngx-mat-file-input>
                 <button
@@ -272,6 +284,11 @@
             </tr>
             <tr>
               <img [src]="imgURL" height="200" *ngIf="imgURL" />
+            </tr>
+            <tr>
+              <mat-error *ngIf="isCategoryError" class="categoryError">
+                {{ categoryError }}
+              </mat-error>
             </tr>
             <tr>
               <td>

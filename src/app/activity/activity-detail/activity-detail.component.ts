@@ -17,6 +17,10 @@ export class ActivityDetailComponent implements OnInit {
   public isLoading: Boolean;
   public isAdmin: Boolean;
   public backend: string = environment.backend;
+  public alertMessage:string = "";
+
+  public popoverTitle: string = 'Activiteit verwijderen';
+  public popoverMessage: string = 'Weet je zeker dat je de activiteit wilt verwijderen?';
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +30,12 @@ export class ActivityDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if(localStorage.getItem("alert") !== null)
+    {
+      this.alertMessage = localStorage.getItem("alert");
+      localStorage.removeItem("alert");
+      setTimeout(() => {this.alertMessage = ""}, 3000);
+    }
     this.isRegistered = false;
     this.isLoading = true;
     if (localStorage.getItem("Activities") !== null) {
@@ -81,3 +91,4 @@ export class ActivityDetailComponent implements OnInit {
     this.activityService.deleteActivity(this.activity.id).subscribe(val => this.router.navigate(["/categorieën"]));
   }
 }
+

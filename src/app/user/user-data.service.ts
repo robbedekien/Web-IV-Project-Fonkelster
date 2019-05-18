@@ -34,6 +34,7 @@ export class UserDataService {
     city: string,
     dateOfBirth: Date
   ): void {
+    console.log(dateOfBirth);
     this.http
       .post(`${environment.apiUrl}/Member/updateUser/`, {
         name: lastName,

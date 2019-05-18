@@ -14,4 +14,10 @@
       />
     </mat-card>
   </div>
+  <div *ngIf="activities.length === 0" class="empty">
+    <p>Er zijn geen activiteiten voor deze categorie</p>
+  </div>
 </div>
+<div *ngIf="alertMessage !== ''" class="alertMessage">
+  <p class="alertMessageText">{{ alertMessage }}</p>
+</div> 

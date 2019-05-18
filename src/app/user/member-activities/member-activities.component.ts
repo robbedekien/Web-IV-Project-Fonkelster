@@ -28,7 +28,6 @@ export class MemberActivitiesComponent implements OnInit {
       .subscribe(value =>
         setTimeout(() => {
           this.activities = value;
-          console.log(this.activities);
         }, 1000)
       );
     } else 
@@ -47,7 +46,6 @@ export class MemberActivitiesComponent implements OnInit {
       .subscribe(value =>
         setTimeout(() => {
           this.activities = value;
-          console.log(this.activities);
         }, 1000)
       );
     });

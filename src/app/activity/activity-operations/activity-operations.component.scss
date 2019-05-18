@@ -5,20 +5,103 @@ $yellow: #F9B820;
 $green: #46B72A;
 $lightblue: #31C5D8;
 
-.activitycontainer
-{
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 2em;
-  .formcontainer {
+.selected {
+  box-sizing: border-box;
+  box-shadow: 10px 10px 91px -12px rgba(0, 0, 0, 0.51);
+  border: 4px solid $green;
+  border-radius: 2px;
+}
+
+.imageError {
+  text-align: left;
+}
+
+.categoryError {
+  margin-bottom: 0.5em;
+}
+
+@media(min-width: 992px) {
+  .activitycontainer {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2em;
+
+    .formcontainer {
+      padding-top: 2em;
+      text-align: center;
+      width: 48%;
+
+      .activityForm {
+        table {
+          max-width: 100%;
+
+          td {
+            .mat-form-field {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .imagecontainer {
+      width: 48%;
+
+      .activityImages {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &>div {
+          max-width: 48%;
+          margin: 0.1em;
+          display: inline-block;
+          padding: 0;
+
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .controls {
+          margin: 0 auto;
+          width: 100%;
+        }
+      }
+    }
+    .activityButtonContainer{
+      margin: 0 auto;
+      .loader{
+        display: block,;
+        width: 30%;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .categorycontainer {
     padding-top: 2em;
     text-align: center;
-    width: 48%;
-    .activityForm{
+    width: 60%;
+    margin: 0 auto;
+
+    .categoryForm {
+      text-align: center;
+      display: block;
+      width: 40%;
+      max-width: 100%;
+      margin: 0 auto;
+
       table {
-        max-width: 100%;
+        display: inline-block;
+
+        tr {
+          width: 100%;
+        }
+
         td {
           .mat-form-field {
             width: 100%;
@@ -27,58 +110,103 @@ $lightblue: #31C5D8;
       }
     }
   }
-  .imagecontainer{
-    width: 48%;
-    .activityImages{
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      &>div{
-        max-width: 48%;
-        margin: 0.1em;
-        display: inline-block;
-        padding: 0;
-        img{
-          width: 100%;
-        }
-      }
-      .controls{
-        margin: 0 auto;
-        width: 100%;
-      }
-    }
-  }
-  button{
-    margin: 0 auto;
-  }
-}
-.categorycontainer{
-  padding-top: 2em;
-  text-align: center;
-  width: 60%;
-  margin: 0 auto;
-  .categoryForm {
-    text-align: center;
-      display: block;
-      width: 40%;
-      max-width: 100%;
-      margin: 0 auto;
-    table {
-      display: inline-block;
-      tr{
-          width: 100%;
-      }
-      td {
-        .mat-form-field {
-          width: 100%;
-        }
-      }
-    }
-  }
 }
 
-.selected{
-  box-sizing: border-box;
-  border: 4px solid $green;
-  border-radius: 2px;
+@media(max-width: 992px) {
+  .activitycontainer {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2em;
+
+    .formcontainer {
+      padding-top: 2em;
+      text-align: center;
+      margin: 0 auto;
+
+
+      .activityForm {
+        table {
+          width: 100%;
+          td,th{
+            margin-right: 0.5em;
+          }
+          tr{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            justify-content: center;
+          }
+
+        }
+      }
+    }
+
+    .imagecontainer {
+      .activityImages {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &>div {
+          max-width: 95%;
+          margin: 0.1em auto;
+          display: inline-block;
+          padding: 0;
+
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        .controls {
+          margin: 0 auto;
+          width: 100%;
+        }
+      }
+    }
+    .activityButtonContainer{
+      width: 100%;
+      button {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 1em;
+      }
+    }
+    
+  }
+
+  .categorycontainer {
+    padding-top: 2em;
+    width: 80%;
+    margin: 0 auto;
+
+    .categoryForm {
+      text-align: center;
+      display: block;
+      max-width: 100%;
+      margin: 0 auto;
+
+      table {
+        width: 100%;
+        td,th{
+          margin-right: 0.5em;
+        }
+        tr{
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0 auto;
+          justify-content: center;
+        }
+
+      }
+    }
+
+    button{
+      margin: 1em 0;
+    }
+
+  }
 }

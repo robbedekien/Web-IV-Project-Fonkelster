@@ -1,3 +1,9 @@
+$blue: #008BD0;
+$red: #E50D0D;
+$orange: #F07306;
+$yellow: #F9B820;
+$green: #46B72A;
+$lightblue: #31C5D8;
 .sidenav-container {
   height: 100%;
 }
@@ -51,6 +57,24 @@
   background-color: #31C5D8;
 }
 
+.navButton.dropdown-toggle{
+  background-color: #31C5D8 !important;
+  padding: 0.1em 0.5em; 
+}
+
+.navRight .dropdown-menu{
+  border: none;
+  a.navButton{
+    background-color: #31C5D8 !important;
+    margin: 0.3em 0;
+    padding: 0.2em;
+    color: white !important;
+   &:first-of-type{
+     margin-top: 0;
+   }
+  }
+}
+
 .fas {
   color: #31C5D8;
 }
@@ -66,19 +90,35 @@ mat-nav-list {
   display: flex;
   flex-direction: column;
 
-  div {
-    margin-top: 0.5em !important;
-    margin: 0 auto;
-    width: 80% !important;
-    a{
-      margin-right: 0;
-    }
-  }
-
   .navButton {
     text-align: center;
     margin: 0.2em auto;
     width: 60%;
+  }
+  &>div{
+    width: 60%;
+    margin: 0 auto;
+  }
+  .dropdown{
+    .dropdown-toggle{
+      width: 100% !important;
+      margin: 0.2em auto;
+    }
+    .dropdown-menu{
+      border: none;
+      width: 100%;
+      a.navButton{
+        background-color: #31C5D8 !important;
+        margin: 0.3em 0;
+        padding: 0.2em;
+        width: 80%;
+        color: white !important;
+        white-space: normal;
+       &:first-of-type{
+         margin-top: 0;
+       }
+      }
+    }
   }
 }
 
@@ -103,23 +143,6 @@ mat-nav-list .navButton:nth-last-child(1) {
   background-color: #31C5D8;
 }
 
-.ng-dropdown-control {
-  background-color: #31C5D8;
-  text-align: center;
-  margin: 0.2em auto;
-  color: white;
-  padding: 0.3em 0.6em;
-  margin-right: 0.5em;
-  border-radius: 50px;
-  bottom: 0px;
-  text-decoration: none;
-  cursor: pointer;
-  width: 100% !important;
-}
-
-.ng-dropdown.ng-star-inserted {
-  display: inline;
-}
 
 @media(min-width: 992px) {
   .logolink {
@@ -140,18 +163,5 @@ mat-nav-list .navButton:nth-last-child(1) {
   .logo {
     height: auto;
     max-width: 100%;
-  }
-}
-
-.ng-dropdown-content {
-  text-align: center;
-}
-
-.dropdowncontent {
-  display: flex;
-  flex-direction: column;
-
-  a {
-    text-align: center;
   }
 }

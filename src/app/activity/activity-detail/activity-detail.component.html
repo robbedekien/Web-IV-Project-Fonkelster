@@ -1,9 +1,19 @@
 <h2>{{ activity.name }}</h2>
 <div class="operationButtons" *ngIf="isAdmin">
   <div>
-    <button [routerLink]="['../../wijzigActiviteit', activity.id, 'activity']" style="margin-right: 0.5em;">Wijzig</button>
-    <button (click)="delete(categorie)" style="background-color: #E50D0D">
-      Verwijder
+    <button
+      [routerLink]="['../../wijzigActiviteit', activity.id, 'activity']"
+      style="margin-right: 0.5em;"
+    >
+      Wijzig
+    </button>
+    <button
+      mwlConfirmationPopover
+      [popoverTitle]="popoverTitle"
+      [popoverMessage]="popoverMessage"
+      placement="left"
+      (confirm)="delete()"
+      style="background-color: #E50D0D"> Verwijder
     </button>
   </div>
 </div>
@@ -37,7 +47,16 @@
       >
         <img [src]="backend + image" alt="{{ activity.name }}" />
       </div>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls
+        (pageChange)="p = $event"
+        *ngIf="activity.images.length !== 0"
+        class="controls"
+        nextLabel="Volgende"
+        previousLabel="Vorige"
+      ></pagination-controls>
     </div>
   </div>
+</div>
+<div *ngIf="alertMessage !== ''" class="alertMessage">
+  <p class="alertMessageText">{{ alertMessage }}</p>
 </div>

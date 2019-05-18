@@ -1,0 +1,26 @@
+$blue: #008BD0;
+$red: #E50D0D;
+$orange: #F07306;
+$yellow: #F9B820;
+$green: #46B72A;
+$lightblue: #31C5D8;
+
+.workspaceContainer{
+    width: 60%;
+    margin: 0 auto;
+    h2{
+        margin: 0 auto;
+        color: $blue;
+    }
+    .innerContainer{
+        display: flex;
+        div{
+            width: 60%;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+    }
+}

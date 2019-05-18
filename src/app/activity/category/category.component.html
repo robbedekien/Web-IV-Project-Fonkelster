@@ -7,25 +7,44 @@
 <div class="categories" *ngIf="!loading; else spinner">
   <div *ngFor="let categorie of categories" class="category">
     <mat-card
-      [routerLink]="['../categorie/', categorie.name]"
       class="category-card"
     >
-      <mat-card-header>
+      <mat-card-header [routerLink]="['../categorie/', categorie.name]">
         <mat-card-title>{{ categorie.name }}</mat-card-title>
       </mat-card-header>
       <img
         mat-card-image
         [src]="backend + categorie.image"
         alt="Foto van categorie"
+        [routerLink]="['../categorie/', categorie.name]"
       />
       <div *ngIf="isAdmin">
-          <button [routerLink]="['../wijzigActiviteit', categorie.name, 'category']" style="margin-right: 0.5em;">Wijzig</button>
-          <button (click)="delete(categorie)" style="background-color: #E50D0D">Verwijder</button>
+        <button
+          [routerLink]="['../wijzigActiviteit', categorie.name, 'category']"
+          style="margin-right: 0.5em;"
+        >
+          Wijzig
+        </button>
+        <button
+          mwlConfirmationPopover
+          [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage"
+          placement="top"
+          (confirm)="delete(categorie)"
+          style="background-color: #E50D0D"
+        >
+          Verwijder
+        </button>
       </div>
     </mat-card>
   </div>
-  <p style="text-align: center" *ngIf="categories.length === 0">Er zijn geen categorieën beschikbaar</p>
+  <p style="text-align: center" *ngIf="categories.length === 0">
+    Er zijn geen categorieën beschikbaar
+  </p>
 </div>
 <ng-template #spinner>
   <img src="../../../assets/images/loading.gif" alt="loading" class="loading" />
 </ng-template>
+<div *ngIf="alertMessage !== ''" class="alertMessage">
+  <p class="alertMessageText">{{ alertMessage }}</p>
+</div>

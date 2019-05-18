@@ -16,10 +16,17 @@ export class ActivityComponent implements OnInit {
   private _activities: Activity[];
   private _selectedActivities: Activity[];
   public backend: string = environment.backend;
+  public alertMessage:string = "";
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    if(localStorage.getItem("alert") !== null)
+    {
+      this.alertMessage = localStorage.getItem("alert");
+      localStorage.removeItem("alert");
+      setTimeout(() => {this.alertMessage = ""}, 3000);
+    }
     this._activities = JSON.parse(localStorage.getItem("Activities"));
     this.route.paramMap.subscribe(pa => {
       this._selectedActivities = JSON.parse(localStorage.getItem("Activities")).filter(a =>
