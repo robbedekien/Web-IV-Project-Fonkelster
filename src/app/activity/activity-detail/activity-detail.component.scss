@@ -85,9 +85,11 @@ h2 {
 
 @media (max-width: 992px) {
   h2{
-    margin-top: 0.5em;
+    margin: 0.5em 0;
   }
   .activityContainer {
+    display: flex;
+    flex-direction: column-reverse;
     width: 80%;
     margin: 0 auto;
 
