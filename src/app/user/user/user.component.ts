@@ -27,6 +27,7 @@ export class UserComponent implements OnInit {
   private user: User;
 
   public alertMessage:string = "";
+  public maxDate:Date = new Date();
 
   selected;
 
