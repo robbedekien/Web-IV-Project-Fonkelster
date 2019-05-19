@@ -1,0 +1,50 @@
+[
+  {
+    "categoryId": 1,
+    "name": "Individuele Coaching",
+    "image": {
+      "imageId": 15,
+      "url": "Resources\\Images\\IndCoaching.jpg"
+    }
+  },
+  {
+    "categoryId": 2,
+    "name": "Kinderkamp",
+    "image": {
+      "imageId": 13,
+      "url": "Resources\\Images\\JongKamp.jpg"
+    }
+  },
+  {
+    "categoryId": 3,
+    "name": "Tienerkamp",
+    "image": {
+      "imageId": 12,
+      "url": "Resources\\Images\\TienKamp.jpg"
+    }
+  },
+  {
+    "categoryId": 4,
+    "name": "Groeitraject",
+    "image": {
+      "imageId": 11,
+      "url": "Resources\\Images\\GroeiTraj.jpg"
+    }
+  },
+  {
+    "categoryId": 5,
+    "name": "Avondvorming",
+    "image": {
+      "imageId": 10,
+      "url": "Resources\\Images\\AvondVorm.jpg"
+    }
+  },
+  {
+    "categoryId": 6,
+    "name": "Ouder & Kind kamp",
+    "image": {
+      "imageId": 9,
+      "url": "Resources\\Images\\OuderKind.jpg"
+    }
+  }
+]

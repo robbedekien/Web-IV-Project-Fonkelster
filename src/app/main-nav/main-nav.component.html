@@ -1,6 +1,7 @@
 <mat-sidenav-container
   class="sidenav-container"
   style="background-color: white;"
+  [hasBackdrop]="true"
 >
   <mat-sidenav
     #drawer
@@ -12,21 +13,23 @@
     position="end"
   >
     <mat-nav-list>
-      <a [routerLink]="['over']" class="navButton">Over</a>
-      <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
+      <a [routerLink]="['over']" class="navButton" (click)="drawer.toggle()">Over</a>
+      <a [routerLink]="['categorieën']" class="navButton" (click)="drawer.toggle()" data-cy="activityButton">Activiteiten</a>
       <a
         [routerLink]="['wijzigActiviteit', '-1', 'activity']"
         class="navButton"
         *ngIf="isAdmin()"
+        (click)="drawer.toggle()"
+        data-cy="addActivityButton"
         >Activiteit toevoegen</a
       >
-      <a [routerLink]="['praktijk']" class="navButton">Praktijk</a>
-      <a [routerLink]="['contact']" class="navButton">Contact</a>
-      <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
+      <a [routerLink]="['praktijk']" class="navButton" (click)="drawer.toggle()">Praktijk</a>
+      <a [routerLink]="['contact']" class="navButton" (click)="drawer.toggle()">Contact</a>
+      <a [routerLink]="['register']" class="navButton" *ngIf="user === null" (click)="drawer.toggle()" data-cy="loginButton"
         >Log in</a
       >
       <div ngbDropdown class="d-inline-block" *ngIf="user !== null" placement="bottom-left">
-        <button class="navButton" id="dropdownBasic1" ngbDropdownToggle>
+        <button class="navButton" id="dropdownBasic1" ngbDropdownToggle data-cy="accountButton">
           Account
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
@@ -34,13 +37,14 @@
             ngbDropdownItem
             [routerLink]="['overzichtInschrijvingen']"
             class="navButton"
+            (click)="drawer.toggle()"
           >
             Inschrijvingen
           </a>
-          <a ngbDropdownItem [routerLink]="['account']" class="navButton">
+          <a ngbDropdownItem [routerLink]="['account']" class="navButton" (click)="drawer.toggle()">
             Wijzig gegevens
           </a>
-          <a ngbDropdownItem class="navButton" (click)="logOut()" style="cursor: pointer">
+          <a ngbDropdownItem class="navButton" (click)="logOut()" style="cursor: pointer" (click)="drawer.toggle()" data-cy="logoutButton">
             Log uit
           </a>
         </div>
@@ -54,16 +58,17 @@
       </a>
       <div *ngIf="!(isHandset$ | async)" class="navRight">
         <a [routerLink]="['over']" class="navButton">Over Fonkelster</a>
-        <a [routerLink]="['categorieën']" class="navButton">Activiteiten</a>
+        <a [routerLink]="['categorieën']" class="navButton" data-cy="activityButton">Activiteiten</a>
         <a
           [routerLink]="['wijzigActiviteit', '-1', 'activity']"
           class="navButton"
           *ngIf="isAdmin()"
+          data-cy="addActivitybutton"
           >Activiteit toevoegen</a
         >
         <a [routerLink]="['praktijk']" class="navButton">Praktijk</a>
         <a [routerLink]="['contact']" class="navButton">Contact</a>
-        <a [routerLink]="['register']" class="navButton" *ngIf="user === null"
+        <a [routerLink]="['register']" class="navButton" *ngIf="user === null" data-cy="loginButton"
           >Log in</a
         >
 

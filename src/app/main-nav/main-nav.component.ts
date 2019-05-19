@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Observable, BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
@@ -7,6 +7,7 @@ import { AuthenticationService } from "../user/authentication.service";
 import { UserDataService } from "../user/user-data.service";
 import { environment } from "src/environments/environment";
 import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: "app-main-nav",
@@ -20,7 +21,6 @@ export class MainNavComponent {
 
   private _user$: BehaviorSubject<string> = this.authService.user$;
   public imagePrefix = environment.imagePrefix;
-
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthenticationService,
@@ -40,4 +40,5 @@ export class MainNavComponent {
   logOut() {
     this.authService.logout();
   }
+
 }

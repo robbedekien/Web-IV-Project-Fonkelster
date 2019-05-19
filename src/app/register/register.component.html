@@ -3,7 +3,7 @@
     <div class="mat-elevation-z4 tabcontent">
       <form (ngSubmit)="logIn()" class="loginForm" [formGroup]="login">
         <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email" />
+          <input matInput placeholder="Email" formControlName="email" data-cy="loginEmailInput"/>
           <mat-error
             *ngIf="login.get('email')['errors'] && login.get('email').touched"
           >
@@ -17,6 +17,7 @@
             formControlName="password"
             [type]="hidel ? 'text' : 'password'"
             required
+            data-cy="loginPasswordInput"
           />
           <mat-icon matSuffix (click)="hidel = !hidel">{{
             hidel ? "visibility_off" : "visibility"
@@ -32,7 +33,7 @@
         <mat-error *ngIf="errorMessage != ''" class="loginError">
           {{ errorMessage }}
         </mat-error>
-        <button type="submit" mat-button>
+        <button type="submit" mat-button data-cy="loginSubmitButton">
           Inloggen
         </button>
       </form>

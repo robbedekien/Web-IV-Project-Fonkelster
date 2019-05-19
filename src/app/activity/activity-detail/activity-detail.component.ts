@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../../user/authentication.service";
 import { ActivityDataService } from "../activity-data.service";
 import { environment } from 'src/environments/environment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: "app-activity-detail",
@@ -26,7 +27,8 @@ export class ActivityDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthenticationService,
     private router: Router,
-    private activityService: ActivityDataService
+    private activityService: ActivityDataService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -89,6 +91,9 @@ export class ActivityDetailComponent implements OnInit {
 
   delete() {
     this.activityService.deleteActivity(this.activity.id).subscribe(val => this.router.navigate(["/categorieën"]));
+  }
+  back() {
+    this.location.back();
   }
 }
 

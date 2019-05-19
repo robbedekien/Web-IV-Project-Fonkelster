@@ -9,7 +9,7 @@
     <mat-card
       class="category-card"
     >
-      <mat-card-header [routerLink]="['../categorie/', categorie.name]">
+      <mat-card-header [routerLink]="['../categorie/', categorie.name]" data-cy="categoryCard">
         <mat-card-title>{{ categorie.name }}</mat-card-title>
       </mat-card-header>
       <img
@@ -21,7 +21,8 @@
       <div *ngIf="isAdmin">
         <button
           [routerLink]="['../wijzigActiviteit', categorie.name, 'category']"
-          style="margin-right: 0.5em;"
+          style="margin-right: 0.5em; margin-bottom: 0.5em;"
+          data-cy="categoryEditButton"
         >
           Wijzig
         </button>
@@ -32,6 +33,7 @@
           placement="top"
           (confirm)="delete(categorie)"
           style="background-color: #E50D0D"
+          data-cy="categoryDeleteButton"
         >
           Verwijder
         </button>

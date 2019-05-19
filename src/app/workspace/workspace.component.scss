@@ -1,26 +1,54 @@
-$blue: #008BD0;
-$red: #E50D0D;
-$orange: #F07306;
-$yellow: #F9B820;
-$green: #46B72A;
-$lightblue: #31C5D8;
+$blue: #008bd0;
+$red: #e50d0d;
+$orange: #f07306;
+$yellow: #f9b820;
+$green: #46b72a;
+$lightblue: #31c5d8;
 
-.workspaceContainer{
+@media (min-width: 992px) {
+  .workspaceContainer {
     width: 60%;
     margin: 0 auto;
-    h2{
-        margin: 0 auto;
-        color: $blue;
+    h2 {
+      margin: 0 auto;
+      color: $blue;
     }
-    .innerContainer{
-        display: flex;
-        div{
-            width: 60%;
-            img{
-                width: 100%;
-                height: auto;
-            }
+    .innerContainer {
+      display: flex;
+      div {
+        width: 60%;
+        img {
+          width: 100%;
+          height: auto;
         }
-        
+      }
     }
+  }
+}
+@media (max-width: 992px) {
+  .workspaceContainer {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    h2 {
+      margin: 0 auto;
+      color: $blue;
+    }
+    .innerContainer {
+      text-align: center;
+      p{
+          margin: 0 auto;
+      }
+      display: flex;
+      flex-wrap: wrap;
+      div {
+        margin: 0 auto;
+        max-width: 90%;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
 }

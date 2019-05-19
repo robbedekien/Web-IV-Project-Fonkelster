@@ -20,6 +20,18 @@ $lightblue: #31C5D8;
 
 @media(min-width: 992px)
 {
+  .back{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2em;
+    cursor: pointer;
+    .backbutton{
+       padding: 0 1em;
+       border-radius: 5px;
+       background-color: $yellow;
+       display: inline-block;
+    }
+  }
   .activities {
     padding-top: 2em !important; 
     display: flex;
@@ -52,15 +64,27 @@ $lightblue: #31C5D8;
 
 @media(max-width: 992px)
 {
+  .back{
+    width: 78%;
+    margin: 0 auto;
+    margin-top: 2em;
+    cursor: pointer;
+    .backbutton{
+       padding: 0 1em;
+       border-radius: 5px;
+       background-color: $yellow;
+       display: inline-block;
+    }
+  }
   .activities {
     padding-top: 2em !important; 
     // display: flex;
     // justify-content: center;
     // flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     .activity {
-      width: 80%;
+      width: 90%;
       text-align: center;
       margin: 0 auto;
       .mat-card {
@@ -81,3 +105,4 @@ $lightblue: #31C5D8;
     
   }
 }
+

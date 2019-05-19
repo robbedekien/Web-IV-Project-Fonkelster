@@ -1,9 +1,9 @@
-$blue: #008BD0;
-$red: #E50D0D;
-$orange: #F07306;
-$yellow: #F9B820;
-$green: #46B72A;
-$lightblue: #31C5D8;
+$blue: #008bd0;
+$red: #e50d0d;
+$orange: #f07306;
+$yellow: #f9b820;
+$green: #46b72a;
+$lightblue: #31c5d8;
 
 h2 {
   margin: 2em;
@@ -11,11 +11,7 @@ h2 {
   color: $blue;
 }
 
-
-
-
-
-@media(min-width: 992px) {
+@media (min-width: 992px) {
   .activityContainer {
     width: 60%;
     margin: 0 auto;
@@ -49,7 +45,7 @@ h2 {
       display: flex;
       flex-wrap: wrap;
 
-      &>div>div {
+      & > div > div {
         max-width: 48%;
         margin: 0.1em;
         display: inline-block;
@@ -60,21 +56,37 @@ h2 {
       }
     }
   }
+  .backres{
+    display: none;
+  }
   .operationButtons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 1em;
-    margin-top: -4.5em;
-  
-    &>div {
+    position: relative;
+    top: -6em;
+
+    .editbuttons {
       margin-right: 1em;
+    }
+    .back {
+      cursor: pointer;
+      .backbutton {
+        padding: 0 1em;
+        border-radius: 5px;
+        background-color: $yellow;
+        display: inline-block;
+      }
     }
   }
 }
 
-@media(max-width: 992px) {
+@media (max-width: 992px) {
+  h2{
+    margin-top: 0.5em;
+  }
   .activityContainer {
     width: 80%;
     margin: 0 auto;
@@ -109,7 +121,7 @@ h2 {
       flex-wrap: wrap;
       margin-top: 1em;
 
-      &>div>div {
+      & > div > div {
         max-width: 48%;
         margin: 0.1em;
         display: inline-block;
@@ -127,10 +139,26 @@ h2 {
     width: 60%;
     margin: 0 auto;
     margin-top: -2em;
-    margin-bottom: 1em;    
-    padding-left: 1em;  
-    &>div {
+    margin-bottom: 1em;
+    padding-left: 1em;
+    & > div {
       margin-right: 1em;
+    }
+  }
+  .back{
+    display: none;
+  }
+  .backres {
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    .backbutton {
+      padding: 0.1em 1em 0 1em;
+      border-radius: 5px;
+      background-color: $yellow;
+      display: inline-block;
     }
   }
 }

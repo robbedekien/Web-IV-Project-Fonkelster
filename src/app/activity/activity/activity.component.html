@@ -1,8 +1,17 @@
+<div class="back">
+  <div class="backbutton" (click)="back()">
+    <i
+      class="fas fa-long-arrow-alt-left fa-2x"
+      style="color: white !important;"
+    ></i>
+  </div>
+</div>
 <div class="activities">
   <div *ngFor="let activity of activities" class="activity">
     <mat-card
       [routerLink]="['../../activiteit/', activity.id]"
       class="activity-card"
+      data-cy="activityCard"
     >
       <mat-card-header>
         <mat-card-title>{{ activity.name }}</mat-card-title>
@@ -20,4 +29,4 @@
 </div>
 <div *ngIf="alertMessage !== ''" class="alertMessage">
   <p class="alertMessageText">{{ alertMessage }}</p>
-</div> 
+</div>

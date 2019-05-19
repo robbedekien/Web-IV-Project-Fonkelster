@@ -4,8 +4,9 @@ import { ActivityDataService } from "../activity-data.service";
 import { Observable } from "rxjs";
 import { Category } from "../../models/category.model";
 import * as _ from "lodash";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { environment } from 'src/environments/environment';
+import {Location} from '@angular/common';
 
 @Component({
   selector: "app-activity",
@@ -18,7 +19,7 @@ export class ActivityComponent implements OnInit {
   public backend: string = environment.backend;
   public alertMessage:string = "";
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private location: Location) {}
 
   ngOnInit() {
     if(localStorage.getItem("alert") !== null)
@@ -37,5 +38,9 @@ export class ActivityComponent implements OnInit {
 
   get activities() {
     return this._selectedActivities;
+  }
+
+  back(){
+    this.location.back();
   }
 }

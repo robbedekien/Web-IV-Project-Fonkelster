@@ -5,25 +5,50 @@ $yellow: #f9b820;
 $green: #46b72a;
 $lightblue: #31c5d8;
 
-.container {
-  width: 60%;
-  h2 {
-    color: $blue;
-  }
-  .aboutImageContainer {
-    width: 80% !important;
-    height: 300px !important;
-    position: relative;
-    overflow: hidden;
-    margin: 0 auto;
-    .aboutImage {
-      display: block;
-      width: 100%;
-      position: absolute;
-      top: 0px; 
+@media(min-width: 992px){
+  .container {
+    width: 60%;
+    h2 {
+      color: $blue;
+    }
+    .aboutImageContainer {
+      width: 80% !important;
+      height: 300px !important;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      .aboutImage {
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 0px; 
+      }
     }
   }
 }
+@media(max-width: 992px){
+  .container {
+    width: 90%;
+    text-align: center;
+    h2 {
+      color: $blue;
+    }
+    .aboutImageContainer {
+      width: 80% !important;
+      height: 300px !important;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      .aboutImage {
+        display: block;
+        width: 100%;
+        position: absolute;
+        top: 0px; 
+      }
+    }
+  }
+}
+
 .filler {
   height: 200px;
 }

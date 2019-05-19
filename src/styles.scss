@@ -13,6 +13,9 @@ $lightblue: #31C5D8;
 /*
     light-blue: 008BD0
 */
+html, body{
+  height: 100%;
+}
 * {
   font-family: 'Fredoka One', cursive;
   color: #626263;
@@ -112,3 +115,13 @@ img{
 .popover{
   margin-bottom: 2em !important;
 } 
+
+.mat-tab-label.mat-tab-disabled{
+  background-color: rgb(224, 224, 224);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.sidenav-container{
+   height: 1000px;
+}

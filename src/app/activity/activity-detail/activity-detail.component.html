@@ -1,9 +1,26 @@
+<div class="backres">
+    <div class="backbutton" (click)="back()" data-cy="activityBackButton">
+      <i
+        class="fas fa-long-arrow-alt-left fa-2x"
+        style="color: white !important;"
+      ></i>
+    </div>
+  </div>
 <h2>{{ activity.name }}</h2>
 <div class="operationButtons" *ngIf="isAdmin">
-  <div>
+  <div class="back">
+    <div class="backbutton" (click)="back()" data-cy="activityBackButton">
+      <i
+        class="fas fa-long-arrow-alt-left fa-2x"
+        style="color: white !important;"
+      ></i>
+    </div>
+  </div>
+  <div class="editbuttons">
     <button
       [routerLink]="['../../wijzigActiviteit', activity.id, 'activity']"
       style="margin-right: 0.5em;"
+      data-cy="activityEditButton"
     >
       Wijzig
     </button>
@@ -13,10 +30,14 @@
       [popoverMessage]="popoverMessage"
       placement="left"
       (confirm)="delete()"
-      style="background-color: #E50D0D"> Verwijder
+      style="background-color: #E50D0D"
+      data-cy="activityDeleteButton"
+    >
+      Verwijder
     </button>
   </div>
 </div>
+
 <div class="activityContainer">
   <div class="description">
     <p>{{ activity.description }}</p>
@@ -60,3 +81,4 @@
 <div *ngIf="alertMessage !== ''" class="alertMessage">
   <p class="alertMessageText">{{ alertMessage }}</p>
 </div>
+<div class="spacer" style="height: 100px;"></div>
