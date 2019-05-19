@@ -67,6 +67,8 @@ $lightblue: #31C5D8;
   .back{
     width: 78%;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
     margin-top: 2em;
     cursor: pointer;
     .backbutton{
