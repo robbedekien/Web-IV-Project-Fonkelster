@@ -144,18 +144,8 @@ mat-nav-list .navButton:nth-last-child(1) {
 }
 
 
-@media(min-width: 992px) {
-  .logolink {
-    max-width: 20%;
-  }
 
-  .logo {
-    height: auto;
-    max-width: 100%;
-  }
-}
-
-@media(max-width: 992px) {
+@media(min-width: 550px) {
   .logolink {
     max-width: 50%;
   }
@@ -165,3 +155,39 @@ mat-nav-list .navButton:nth-last-child(1) {
     max-width: 100%;
   }
 }
+
+@media(min-width: 992px) {
+  .logolink {
+    max-width: 40%;
+  }
+
+  .logo {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+
+@media(min-width: 1080px) {
+  .logolink {
+    max-width: 30%;
+  }
+
+  .logo {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+@media(max-width: 550px) {
+  .logolink {
+    max-width: 75%;
+  }
+
+  .logo {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+
