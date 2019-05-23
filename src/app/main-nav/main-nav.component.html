@@ -16,10 +16,10 @@
       <a [routerLink]="['over']" class="navButton" (click)="drawer.toggle()">Over</a>
       <a [routerLink]="['categorieën']" class="navButton" (click)="drawer.toggle()" data-cy="activityButton">Activiteiten</a>
       <a
-        [routerLink]="['wijzigActiviteit', '-1', 'activity']"
+        
         class="navButton"
         *ngIf="isAdmin()"
-        (click)="drawer.toggle()"
+        (click)="drawer.toggle(); activity()"
         data-cy="addActivityButton"
         >Activiteit toevoegen</a
       >
@@ -38,6 +38,7 @@
             [routerLink]="['overzichtInschrijvingen']"
             class="navButton"
             (click)="drawer.toggle()"
+            data-cy="subscriptionButton"
           >
             Inschrijvingen
           </a>
@@ -60,10 +61,10 @@
         <a [routerLink]="['over']" class="navButton">Over Fonkelster</a>
         <a [routerLink]="['categorieën']" class="navButton" data-cy="activityButton">Activiteiten</a>
         <a
-          [routerLink]="['wijzigActiviteit', '-1', 'activity']"
           class="navButton"
           *ngIf="isAdmin()"
           data-cy="addActivitybutton"
+          (click)="activity()"
           >Activiteit toevoegen</a
         >
         <a [routerLink]="['praktijk']" class="navButton">Praktijk</a>

@@ -59,6 +59,23 @@ h2 {
   .backres{
     display: none;
   }
+
+  .backdef {
+    display: flex;
+    justify-content: flex-start;
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    top: -6em;
+    cursor: pointer;
+    .backbutton {
+      padding: 0 1em;
+      border-radius: 5px;
+      background-color: $yellow;
+      display: inline-block;
+    }
+  }
+
   .operationButtons {
     display: flex;
     justify-content: space-between;
@@ -147,6 +164,9 @@ h2 {
     }
   }
   .back{
+    display: none;
+  }
+  .backdef{
     display: none;
   }
   .backres {

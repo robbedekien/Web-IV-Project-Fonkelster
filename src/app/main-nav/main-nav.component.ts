@@ -8,6 +8,7 @@ import { UserDataService } from "../user/user-data.service";
 import { environment } from "src/environments/environment";
 import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 import { MatSidenav } from '@angular/material';
+import { Route, Router, Navigation } from '@angular/router';
 
 @Component({
   selector: "app-main-nav",
@@ -21,11 +22,14 @@ export class MainNavComponent {
 
   private _user$: BehaviorSubject<string> = this.authService.user$;
   public imagePrefix = environment.imagePrefix;
+  private currentNavigation;
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthenticationService,
     private userDataService: UserDataService,
-    config: NgbDropdownConfig
+    config: NgbDropdownConfig,
+    private router: Router
   ) {
   }
 
@@ -39,6 +43,16 @@ export class MainNavComponent {
 
   logOut() {
     this.authService.logout();
+  }
+
+  activity(){
+    if(this.router.url.includes("wijzigActiviteit"))
+    {
+      this.router.navigateByUrl('/RefrshComponent', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['wijzigActiviteit', '-1', 'activity'])); 
+    } else {
+      this.router.navigate(['wijzigActiviteit', '-1', 'activity']);
+    }
   }
 
 }

@@ -1,12 +1,20 @@
 <div class="backres">
-    <div class="backbutton" (click)="back()" data-cy="activityBackButton">
-      <i
-        class="fas fa-long-arrow-alt-left fa-2x"
-        style="color: white !important;"
-      ></i>
-    </div>
+  <div class="backbutton" (click)="back()" data-cy="activityBackButton">
+    <i
+      class="fas fa-long-arrow-alt-left fa-2x"
+      style="color: white !important;"
+    ></i>
   </div>
+</div>
 <h2>{{ activity.name }}</h2>
+<div class="backdef" *ngIf="!isAdmin">
+  <div class="backbutton" (click)="back()" data-cy="activityBackButton">
+    <i
+      class="fas fa-long-arrow-alt-left fa-2x"
+      style="color: white !important;"
+    ></i>
+  </div>
+</div>
 <div class="operationButtons" *ngIf="isAdmin">
   <div class="back">
     <div class="backbutton" (click)="back()" data-cy="activityBackButton">
@@ -50,11 +58,11 @@
     />
 
     <ng-template #doneLoading>
-      <button (click)="register()" *ngIf="!isRegistered; else notRegistered">
+      <button (click)="register()" *ngIf="!isRegistered; else notRegistered" data-cy="subscribeButton">
         Inschrijven
       </button>
       <ng-template #notRegistered>
-        <button (click)="unsubscribe()">Uitschrijven</button>
+        <button (click)="unsubscribe()" data-cy="unsubscribeButton">Uitschrijven</button>
       </ng-template>
     </ng-template>
   </div>

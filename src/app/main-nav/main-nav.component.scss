@@ -31,6 +31,11 @@ $lightblue: #31C5D8;
   text-decoration: none;
 }
 
+.navButton.ng-star-inserted{
+  color: white !important;
+  cursor: pointer;
+}
+
 .navRight {
   float: right;
 

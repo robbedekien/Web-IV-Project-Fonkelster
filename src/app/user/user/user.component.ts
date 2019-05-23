@@ -26,8 +26,8 @@ export class UserComponent implements OnInit {
   private genders: string[] = ["Man", "Vrouw"];
   private user: User;
 
-  public alertMessage:string = "";
-  public maxDate:Date = new Date();
+  public alertMessage: string = "";
+  public maxDate: Date = new Date();
 
   selected;
 
@@ -56,8 +56,8 @@ export class UserComponent implements OnInit {
     if (localStorage.getItem("user") !== null) {
       this.user = JSON.parse(localStorage.getItem("user"));
     }
-    var d = new Date(this.user.DoB);  
-    d.setDate( d.getDate() + 1);
+    var d = new Date(this.user.DoB);
+    d.setDate(d.getDate() + 1);
     this.selected = this.user.gender.toString();
     this.adapter.setLocale("nl");
     this.register = this.fbr.group({
@@ -72,7 +72,12 @@ export class UserComponent implements OnInit {
       city: [this.user.location.city, [Validators.required]],
       postal: [
         this.user.location.postalCode,
-        [Validators.required, this.validateNumber]
+        [
+          Validators.required,
+          this.validateNumber,
+          Validators.maxLength(4),
+          Validators.minLength(4)
+        ]
       ],
       dateOfBirth: [d, [Validators.required]],
       gender: [this.user.gender, [Validators.required]]
@@ -92,6 +97,10 @@ export class UserComponent implements OnInit {
     } else if (errors.minlength) {
       return `Dit veld moet minstens ${errors.minlength.requiredLength} 
         karakters bevatten (nu ${errors.minlength.actualLength})`;
+    } else if (errors.maxLength) {
+      return `Dit veld mag maximum ${
+        errors.maxLength.requiredLength
+      } karakters bevatten (nu ${errors.minlength.actualLength})`;
     } else if (errors.email) {
       return "Dit veld bevat geen geldig e-mailadres";
     } else if (errors.userAlreadyExists) {
@@ -112,6 +121,6 @@ export class UserComponent implements OnInit {
       this.register.value.city,
       d
     );
-    this.alertMessage="Gegevens succesvol gewijzigd";
+    this.alertMessage = "Gegevens succesvol gewijzigd";
   }
 }
