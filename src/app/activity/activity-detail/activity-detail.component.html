@@ -40,6 +40,8 @@
       (confirm)="delete()"
       style="background-color: #E50D0D"
       data-cy="activityDeleteButton"
+      cancelText="Annuleer"
+      confirmText="Verwijder"
     >
       Verwijder
     </button>
@@ -49,7 +51,7 @@
 <div class="activityContainer">
   <div class="description">
     <p>{{ activity.description }}</p>
-    <p>Van {{ activity.start | date }} tot {{ activity.end | date }}</p>
+    <p>Van {{ start | date }} tot {{ end | date }}</p>
     <img
       src="../../assets/images/loading.gif"
       alt="laden"

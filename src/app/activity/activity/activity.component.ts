@@ -5,8 +5,8 @@ import { Observable } from "rxjs";
 import { Category } from "../../models/category.model";
 import * as _ from "lodash";
 import { ActivatedRoute, Router } from "@angular/router";
-import { environment } from 'src/environments/environment';
-import {Location} from '@angular/common';
+import { environment } from "src/environments/environment";
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-activity",
@@ -17,21 +17,28 @@ export class ActivityComponent implements OnInit {
   private _activities: Activity[];
   private _selectedActivities: Activity[];
   public backend: string = environment.backend;
-  public alertMessage:string = "";
+  public alertMessage: string = "";
 
-  constructor(private route: ActivatedRoute, private location: Location) {}
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    if(localStorage.getItem("alert") !== null)
-    {
+    if (localStorage.getItem("alert") !== null) {
       this.alertMessage = localStorage.getItem("alert");
       localStorage.removeItem("alert");
-      setTimeout(() => {this.alertMessage = ""}, 3000);
+      setTimeout(() => {
+        this.alertMessage = "";
+      }, 3000);
     }
     this._activities = JSON.parse(localStorage.getItem("Activities"));
     this.route.paramMap.subscribe(pa => {
-      this._selectedActivities = JSON.parse(localStorage.getItem("Activities")).filter(a =>
-        _.lowerCase(a.category.name) == _.lowerCase(pa.get("category"))
+      this._selectedActivities = JSON.parse(
+        localStorage.getItem("Activities")
+      ).filter(
+        a => _.lowerCase(a.category.name) == _.lowerCase(pa.get("category"))
       );
     });
   }
@@ -40,7 +47,7 @@ export class ActivityComponent implements OnInit {
     return this._selectedActivities;
   }
 
-  back(){
-    this.location.back();
+  back() {
+    this.router.navigate(["/categorieën"]);
   }
 }

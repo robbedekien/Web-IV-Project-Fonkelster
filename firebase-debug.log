@@ -1,0 +1,27 @@
+[debug] [2019-05-24T09:34:28.093Z] ----------------------------------------------------------------------
+[debug] [2019-05-24T09:34:28.095Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\robbe\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-05-24T09:34:28.096Z] CLI Version:   6.10.0
+[debug] [2019-05-24T09:34:28.096Z] Platform:      win32
+[debug] [2019-05-24T09:34:28.096Z] Node Version:  v10.15.1
+[debug] [2019-05-24T09:34:28.102Z] Time:          Fri May 24 2019 11:34:28 GMT+0200 (GMT+02:00)
+[debug] [2019-05-24T09:34:28.102Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-24T09:34:28.114Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-24T09:34:28.115Z] > authorizing via signed-in user
+[debug] [2019-05-24T09:34:28.115Z] [iam] checking project fonkelster-1 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-05-24T09:34:28.117Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-05-24T09:34:28.118Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-05-24T09:34:28.281Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-24T09:34:28.288Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/fonkelster-1:testIamPermissions  
+
+[debug] [2019-05-24T09:34:29.075Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-24T09:34:29.077Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/fonkelster-1  
+ 
+[debug] [2019-05-24T09:34:29.382Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fonkelster-1'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-05-24T09:34:29.387Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/fonkelster-1/versions  
+

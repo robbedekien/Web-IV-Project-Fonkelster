@@ -106,6 +106,10 @@ export class ActivityOperationsComponent implements OnInit {
               .map(val => val.name)
               .indexOf(val.category.name);
             this.concreteActivity = val;
+            var dstart = new Date(val.start);
+            dstart.setDate(dstart.getDate() + 1);
+            var dend = new Date(val.end);
+            dend.setDate(dend.getDate() + 1);
             this.activity = this.fba.group(
               {
                 name: [val.name, [Validators.required]],
@@ -114,8 +118,8 @@ export class ActivityOperationsComponent implements OnInit {
                   [Validators.required]
                 ],
                 description: [val.description, [Validators.required]],
-                start: [val.start, [Validators.required]],
-                end: [val.end, [Validators.required]],
+                start: [dstart, [Validators.required]],
+                end: [dend, [Validators.required]],
                 images: [""]
               },
               { validators: this.validateDate }
@@ -340,6 +344,9 @@ export class ActivityOperationsComponent implements OnInit {
       return null;
     } else {
       this.isSubmitted = true;
+      var dstart = new Date(this.activity.value.start);
+      var dend = new Date(this.activity.value.end);
+
       this.route.paramMap.subscribe(pa => {
         if (pa.get("Id") == "-1") {
           this.activityService
@@ -350,8 +357,8 @@ export class ActivityOperationsComponent implements OnInit {
                 .addActivity(
                   this.activity.value.name,
                   this.activity.value.description,
-                  this.activity.value.start,
-                  this.activity.value.end,
+                  dstart,
+                  dend,
                   this.activity.value.categories.name,
                   urls[this.frontImageIndex],
                   urls
@@ -378,20 +385,23 @@ export class ActivityOperationsComponent implements OnInit {
                 this.activity.value.name,
                 this.activity.value.description,
                 this.activity.value.categories,
-                this.activity.value.start,
-                this.activity.value.end,
+                dstart,
+                dend,
                 this.concreteActivity.images[this.frontImageIndex],
                 this.concreteActivity.images
               )
               .subscribe(val => {
-                localStorage.setItem(
-                  "alert",
-                  "Activiteit is succesvol gewijzigd"
-                );
-                this.router.navigate([
-                  "/activiteit",
-                  this.concreteActivity.id.toString()
-                ]);
+                this.activityService.activities$.subscribe(as => {
+                  localStorage.setItem("Activities", JSON.stringify(as));
+                  localStorage.setItem(
+                    "alert",
+                    "Activiteit is succesvol gewijzigd"
+                  );
+                  this.router.navigate([
+                    "/activiteit",
+                    this.concreteActivity.id.toString()
+                  ]);
+                });
               });
           } else {
             this.activityService
@@ -404,20 +414,23 @@ export class ActivityOperationsComponent implements OnInit {
                     this.activity.value.name,
                     this.activity.value.description,
                     this.activity.value.categories,
-                    this.activity.value.start,
-                    this.activity.value.end,
+                    dstart,
+                    dend,
                     urls[this.frontImageIndex],
                     urls
                   )
                   .subscribe(val => {
-                    localStorage.setItem(
-                      "alert",
-                      "Activiteit is succesvol gewijzigd"
-                    );
-                    this.router.navigate([
-                      "/activiteit",
-                      this.concreteActivity.id.toString()
-                    ]);
+                    this.activityService.activities$.subscribe(as => {
+                      localStorage.setItem("Activities", JSON.stringify(as));
+                      localStorage.setItem(
+                        "alert",
+                        "Activiteit is succesvol gewijzigd"
+                      );
+                      this.router.navigate([
+                        "/activiteit",
+                        this.concreteActivity.id.toString()
+                      ]);
+                    });
                   });
               });
           }

@@ -19,7 +19,8 @@ export class ActivityDetailComponent implements OnInit {
   public isAdmin: Boolean;
   public backend: string = environment.backend;
   public alertMessage:string = "";
-
+  public start:Date = new Date();
+  public end:Date = new Date();
   public popoverTitle: string = 'Activiteit verwijderen';
   public popoverMessage: string = 'Weet je zeker dat je de activiteit wilt verwijderen?';
 
@@ -45,6 +46,10 @@ export class ActivityDetailComponent implements OnInit {
         this.activity = JSON.parse(localStorage.getItem("Activities")).filter(
           a => a.id == pa.get("activityId")
         )[0];
+        this.start = new Date(this.activity.start);
+        this.end = new Date(this.activity.end);
+        this.start.setDate(this.start.getDate() + 1);
+        this.end.setDate(this.end.getDate() + 1);
       });
     }
 
@@ -93,7 +98,7 @@ export class ActivityDetailComponent implements OnInit {
     this.activityService.deleteActivity(this.activity.id).subscribe(val => this.router.navigate(["/categorieën"]));
   }
   back() {
-    this.location.back();
+    this.router.navigate(["/categorie", this.activity.category.name])
   }
 }
 
