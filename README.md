@@ -1,5 +1,7 @@
 # Fonkelster
 
+(Backend verlopen, online versie niet bruikbaar)
+
 Online versie van het project: https://fonkelster-1.firebaseapp.com/home
 
 Inloggegevens voor admin: robbe.dekien@hotmail.com | Robbe123
