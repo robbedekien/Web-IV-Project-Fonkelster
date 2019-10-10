@@ -1,9 +1,4 @@
 # Fonkelster
-
-(Backend verlopen, online versie niet bruikbaar)
-
-Online versie van het project: https://fonkelster-1.firebaseapp.com/home
-
-Inloggegevens voor admin: robbe.dekien@hotmail.com | Robbe123
-
-Inloggegevens voor gewone gebruiker: web4@student.hogent.be | Gelukkiggeennetbeans1
+  An extention to the existing website
+  <a href="fonkelster.be" target="_blank">Fonkelster</a>, made
+  in Angular and a REST Api in C#
